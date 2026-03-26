@@ -11,42 +11,55 @@
     --text: #f1f5f9; --muted: #94a3b8; --accent: #818cf8;
     --p1: #6366f1; --p2: #f59e0b; --green: #34d399; --red: #f87171;
     --p1-light: #a5b4fc; --p2-light: #fcd34d;
+    --appt: #22d3ee; --prod: #a78bfa;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 24px; }
   .container { max-width: 1200px; margin: 0 auto; }
   h1 { font-size: 1.75rem; margin-bottom: 4px; }
   .subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
-  .back { color: var(--accent); text-decoration: none; font-size: 0.85rem; display: inline-block; margin-bottom: 16px; }
-  .back:hover { text-decoration: underline; }
 
-  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
-  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
-  .kpi .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
-  .kpi .value { font-size: 2rem; font-weight: 700; }
-  .kpi .detail { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+  .def-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 28px; }
+  .def-box h2 { font-size: 1.1rem; margin-bottom: 12px; }
+  .def-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .def-card { padding: 14px; border-radius: 8px; border-left: 4px solid; }
+  .def-card.appt { border-color: var(--appt); background: rgba(34,211,238,0.06); }
+  .def-card.prod { border-color: var(--prod); background: rgba(167,139,250,0.06); }
+  .def-card .def-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+  .def-card.appt .def-title { color: var(--appt); }
+  .def-card.prod .def-title { color: var(--prod); }
+  .def-card .def-desc { font-size: 0.82rem; color: var(--muted); }
+  .def-card code { background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px; font-size: 0.78rem; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 32px; }
+  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center; }
+  .kpi .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 4px; }
+  .kpi .value { font-size: 1.7rem; font-weight: 700; }
+  .kpi .detail { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
   .kpi.p1 .value { color: var(--p1-light); }
   .kpi.p2 .value { color: var(--p2-light); }
   .kpi.delta .value { color: var(--green); }
 
   .section { margin-bottom: 40px; }
   .section h2 { font-size: 1.25rem; margin-bottom: 6px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
-  .section .insight { background: var(--surface); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0 20px; font-size: 0.9rem; color: var(--muted); }
+  .section .insight { background: var(--surface); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0 20px; font-size: 0.88rem; color: var(--muted); }
   .section .insight strong { color: var(--text); }
 
   .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 24px; }
   .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-  .chart-card h3 { font-size: 1rem; margin-bottom: 12px; color: var(--text); }
+  .chart-card h3 { font-size: 0.95rem; margin-bottom: 12px; color: var(--text); }
   canvas { max-height: 340px; }
 
-  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 12px; }
-  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
-  th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.5px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 12px; }
+  th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.5px; }
   tr:hover td { background: rgba(99,102,241,0.05); }
   .num { text-align: right; font-variant-numeric: tabular-nums; }
   .highlight { color: var(--green); font-weight: 600; }
+  .col-appt { color: var(--appt); }
+  .col-prod { color: var(--prod); }
 
-  .legend-row { display: flex; gap: 24px; margin-bottom: 16px; }
+  .legend-row { display: flex; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--muted); }
   .legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
 
@@ -56,33 +69,50 @@
 <body>
 <div class="container">
 
-<a class="back" href="../lhuang6_index.html">&larr; Lanny's reports</a>
 <h1>IVR Prompt 1 vs 2: Appointment Completion Analysis</h1>
 <p class="subtitle">Concierge IVR routing &middot; Since 3/13/2026 IVR change &middot; Source: ae_concierge_mece</p>
+
+<!-- Metric Definitions -->
+<div class="def-box">
+  <h2>Metric Definitions</h2>
+  <div class="def-grid">
+    <div class="def-card appt">
+      <div class="def-title">Appointment Handled Rate</div>
+      <div class="def-desc">% of scheduled appointments where the expert actually met with the customer. Based on <code>handled_ind = 1</code>. Measures whether the appointment itself was fulfilled.</div>
+    </div>
+    <div class="def-card prod">
+      <div class="def-title">Product Completion Rate</div>
+      <div class="def-desc">% of scheduled appointments where the customer ultimately filed their tax return. Based on <code>completed_flag = 1</code>. Measures the downstream business outcome.</div>
+    </div>
+  </div>
+</div>
 
 <div class="legend-row">
   <div class="legend-item"><div class="legend-swatch" style="background:var(--p1)"></div> Option 1 &mdash; "Need help filing"</div>
   <div class="legend-item"><div class="legend-swatch" style="background:var(--p2)"></div> Option 2 &mdash; "Already filed / tech support"</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--appt)"></div> Appt Handled</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:var(--prod)"></div> Product Completed</div>
 </div>
 
 <!-- KPI Row -->
 <div class="kpi-row">
-  <div class="kpi p1"><div class="label">Option 1 Completion</div><div class="value">26.0%</div><div class="detail">628 of 2,412 appts</div></div>
-  <div class="kpi p2"><div class="label">Option 2 Completion</div><div class="value">30.5%</div><div class="detail">273 of 895 appts</div></div>
-  <div class="kpi delta"><div class="label">Option 2 &Delta;</div><div class="value">+4.5pp</div><div class="detail">Higher completion rate</div></div>
-  <div class="kpi p1"><div class="label">Option 1 Start Rate</div><div class="value">78.6%</div><div class="detail">1,895 of 2,412</div></div>
-  <div class="kpi p2"><div class="label">Option 2 Start Rate</div><div class="value">73.3%</div><div class="detail">656 of 895</div></div>
+  <div class="kpi p1"><div class="label">Opt 1 Appt Handled</div><div class="value">40.0%</div><div class="detail">965 / 2,412</div></div>
+  <div class="kpi p2"><div class="label">Opt 2 Appt Handled</div><div class="value">42.5%</div><div class="detail">380 / 895</div></div>
+  <div class="kpi delta"><div class="label">Appt Handled &Delta;</div><div class="value">+2.5pp</div><div class="detail">Opt 2 higher</div></div>
+  <div class="kpi p1"><div class="label">Opt 1 Product Comp</div><div class="value">26.0%</div><div class="detail">628 / 2,412</div></div>
+  <div class="kpi p2"><div class="label">Opt 2 Product Comp</div><div class="value">30.5%</div><div class="detail">273 / 895</div></div>
+  <div class="kpi delta"><div class="label">Product Comp &Delta;</div><div class="value">+4.5pp</div><div class="detail">Opt 2 higher</div></div>
 </div>
 
 <!-- Section 1: Overall Comparison -->
 <div class="section">
-  <h2>1. Overall: Option 1 vs Option 2</h2>
+  <h2>1. Overall: Appointment Handled vs Product Completion</h2>
   <div class="insight">
-    <strong>Key finding:</strong> Option 2 appointments complete at a <strong>higher rate (30.5%)</strong> than Option 1 (26.0%), despite Option 2 callers theoretically having already filed. This suggests the appointments booked for Option 2 callers are productive conversions, not empty bookings.
+    <strong>Both metrics favor Option 2.</strong> Appointment handled rate is 42.5% vs 40.0% (+2.5pp), and product completion rate is 30.5% vs 26.0% (+4.5pp). Notably, product start rate is slightly lower for Opt 2 (73.3% vs 78.6%), but those who do engage convert to completion at a higher rate.
   </div>
   <div class="chart-grid">
-    <div class="chart-card"><h3>Completion & Start Rates</h3><canvas id="chartOverall"></canvas></div>
-    <div class="chart-card"><h3>Volume Comparison</h3><canvas id="chartVolume"></canvas></div>
+    <div class="chart-card"><h3>Appt Handled vs Product Completion — by Prompt</h3><canvas id="chartOverall"></canvas></div>
+    <div class="chart-card"><h3>Full Funnel: Scheduled &rarr; Handled &rarr; Started &rarr; Completed</h3><canvas id="chartFunnel"></canvas></div>
   </div>
 </div>
 
@@ -90,20 +120,19 @@
 <div class="section">
   <h2>2. By Appointment Type</h2>
   <div class="insight">
-    <strong>In-Person dominates:</strong> ~71% of Option 1 and ~72% of Option 2 appointments are <strong>PreAuth In-Person</strong>. Option 2 In-Person appointments complete at <strong>31.1%</strong> vs 26.8% for Option 1. Virtual appointments show a similar pattern (29.0% vs 24.1%).
+    <strong>Virtual appointments are handled far more often</strong> (58-67%) than In-Person (33%), but In-Person converts to product completion at a higher rate. Option 2 outperforms Option 1 on <em>both</em> metrics across both appointment types.
   </div>
   <div class="chart-grid">
-    <div class="chart-card"><h3>Completion Rate by Appointment Type</h3><canvas id="chartApptType"></canvas></div>
+    <div class="chart-card"><h3>Appt Handled Rate by Type</h3><canvas id="chartApptTypeHandled"></canvas></div>
     <div class="chart-card">
-      <h3>Appointment Type Mix</h3>
+      <h3>Detail by Appointment Type</h3>
       <table>
-        <thead><tr><th>Appointment Type</th><th>Prompt</th><th class="num">Appts</th><th class="num">Completed</th><th class="num">Rate</th><th class="num">Started</th><th class="num">Start Rate</th></tr></thead>
+        <thead><tr><th>Type</th><th>Prompt</th><th class="num">Appts</th><th class="num col-appt">Handled</th><th class="num col-appt">Rate</th><th class="num col-prod">Completed</th><th class="num col-prod">Rate</th></tr></thead>
         <tbody>
-          <tr><td>PreAuth In-Person 1:1</td><td>Opt 1</td><td class="num">1,714</td><td class="num">460</td><td class="num">26.8%</td><td class="num">1,339</td><td class="num">78.1%</td></tr>
-          <tr><td>PreAuth In-Person 1:1</td><td>Opt 2</td><td class="num">647</td><td class="num">201</td><td class="num highlight">31.1%</td><td class="num">456</td><td class="num">70.5%</td></tr>
-          <tr><td>PreAuth Virtual 1:1</td><td>Opt 1</td><td class="num">694</td><td class="num">167</td><td class="num">24.1%</td><td class="num">552</td><td class="num">79.5%</td></tr>
-          <tr><td>PreAuth Virtual 1:1</td><td>Opt 2</td><td class="num">248</td><td class="num">72</td><td class="num highlight">29.0%</td><td class="num">200</td><td class="num">80.6%</td></tr>
-          <tr><td>In-Person 1:1 (Post-Auth)</td><td>Opt 1</td><td class="num">4</td><td class="num">1</td><td class="num">25.0%</td><td class="num">4</td><td class="num">100%</td></tr>
+          <tr><td>PreAuth In-Person</td><td>Opt 1</td><td class="num">1,714</td><td class="num">561</td><td class="num">32.7%</td><td class="num">460</td><td class="num">26.8%</td></tr>
+          <tr><td>PreAuth In-Person</td><td>Opt 2</td><td class="num">647</td><td class="num">215</td><td class="num highlight">33.2%</td><td class="num">201</td><td class="num highlight">31.1%</td></tr>
+          <tr><td>PreAuth Virtual</td><td>Opt 1</td><td class="num">694</td><td class="num">400</td><td class="num">57.6%</td><td class="num">167</td><td class="num">24.1%</td></tr>
+          <tr><td>PreAuth Virtual</td><td>Opt 2</td><td class="num">248</td><td class="num">165</td><td class="num highlight">66.5%</td><td class="num">72</td><td class="num highlight">29.0%</td></tr>
         </tbody>
       </table>
     </div>
@@ -114,23 +143,23 @@
 <div class="section">
   <h2>3. Appointment Outcome Distribution</h2>
   <div class="insight">
-    <strong>Agent misses are prevalent:</strong> Over half of appointments in both prompts result in <strong>agent_missed_wo_backup</strong> &mdash; but those still convert at ~39-40%. Future appointments naturally have low completion (3-11%) as they haven't occurred yet. Customer misses convert at ~31% for both.
+    <strong>"Agent missed" is the most common outcome (~52-55%)</strong> but still yields ~39-40% product completion — meaning many customers file even without the appointment being handled. <strong>"Original agent joined"</strong> has 100% appt handled (by definition) but lower product completion (21-29%), suggesting these may be more complex cases.
   </div>
   <div class="chart-grid">
-    <div class="chart-card"><h3>Outcome Distribution</h3><canvas id="chartOutcome"></canvas></div>
+    <div class="chart-card"><h3>Outcome Mix & Product Completion Rate</h3><canvas id="chartOutcome"></canvas></div>
     <div class="chart-card">
-      <h3>Completion by Outcome</h3>
+      <h3>Outcome Detail</h3>
       <table>
-        <thead><tr><th>Outcome</th><th>Prompt</th><th class="num">Appts</th><th class="num">Completed</th><th class="num">Rate</th></tr></thead>
+        <thead><tr><th>Outcome</th><th>Prompt</th><th class="num">Appts</th><th class="num col-appt">Handled</th><th class="num col-prod">Prod Comp</th><th class="num col-prod">Rate</th></tr></thead>
         <tbody>
-          <tr><td>Agent Missed (no backup)</td><td>Opt 1</td><td class="num">1,255</td><td class="num">490</td><td class="num">39.0%</td></tr>
-          <tr><td>Agent Missed (no backup)</td><td>Opt 2</td><td class="num">497</td><td class="num">200</td><td class="num highlight">40.2%</td></tr>
-          <tr><td>Future Appointment</td><td>Opt 1</td><td class="num">778</td><td class="num">27</td><td class="num">3.5%</td></tr>
-          <tr><td>Future Appointment</td><td>Opt 2</td><td class="num">254</td><td class="num">29</td><td class="num highlight">11.4%</td></tr>
-          <tr><td>Customer Missed</td><td>Opt 1</td><td class="num">293</td><td class="num">93</td><td class="num">31.7%</td></tr>
-          <tr><td>Customer Missed</td><td>Opt 2</td><td class="num">103</td><td class="num">32</td><td class="num">31.1%</td></tr>
-          <tr><td>Original Agent Joined</td><td>Opt 1</td><td class="num">86</td><td class="num">18</td><td class="num">20.9%</td></tr>
-          <tr><td>Original Agent Joined</td><td>Opt 2</td><td class="num">41</td><td class="num">12</td><td class="num">29.3%</td></tr>
+          <tr><td>Agent Missed (no backup)</td><td>Opt 1</td><td class="num">1,255</td><td class="num">674</td><td class="num">490</td><td class="num">39.0%</td></tr>
+          <tr><td>Agent Missed (no backup)</td><td>Opt 2</td><td class="num">497</td><td class="num">264</td><td class="num">200</td><td class="num highlight">40.2%</td></tr>
+          <tr><td>Future Appt</td><td>Opt 1</td><td class="num">778</td><td class="num">0</td><td class="num">27</td><td class="num">3.5%</td></tr>
+          <tr><td>Future Appt</td><td>Opt 2</td><td class="num">254</td><td class="num">0</td><td class="num">29</td><td class="num highlight">11.4%</td></tr>
+          <tr><td>Customer Missed</td><td>Opt 1</td><td class="num">293</td><td class="num">205</td><td class="num">93</td><td class="num">31.7%</td></tr>
+          <tr><td>Customer Missed</td><td>Opt 2</td><td class="num">103</td><td class="num">75</td><td class="num">32</td><td class="num">31.1%</td></tr>
+          <tr><td>Orig Agent Joined</td><td>Opt 1</td><td class="num">86</td><td class="num">86</td><td class="num">18</td><td class="num">20.9%</td></tr>
+          <tr><td>Orig Agent Joined</td><td>Opt 2</td><td class="num">41</td><td class="num">41</td><td class="num">12</td><td class="num highlight">29.3%</td></tr>
         </tbody>
       </table>
     </div>
@@ -139,12 +168,12 @@
 
 <!-- Section 4: SKU Mix -->
 <div class="section">
-  <h2>4. Completed SKU Mix</h2>
+  <h2>4. Product Completion — SKU Mix</h2>
   <div class="insight">
-    <strong>FS is the dominant outcome:</strong> Among completers, <strong>Full Service</strong> is the top SKU for both prompts (20.9% of Opt 1, 18.3% of Opt 2). Notably, Option 2 has a higher share of <strong>DIWM Non-Basic</strong> (4.4% vs 2.1%) and <strong>DIY Paid</strong> (2.4% vs 1.1%), suggesting these callers also self-serve after the concierge interaction.
+    <strong>Full Service dominates both prompts</strong> (20.9% of Opt 1, 18.4% of Opt 2 total appointments). But Option 2 shows a notably <strong>higher DIWM/DIY share</strong> — 4.4% DIWM Non-Basic + 2.4% DIY Paid vs 2.1% + 1.1% for Opt 1 — suggesting some Option 2 callers self-serve after the concierge interaction.
   </div>
   <div class="chart-grid">
-    <div class="chart-card"><h3>SKU Mix (% of all appointments per prompt)</h3><canvas id="chartSku"></canvas></div>
+    <div class="chart-card"><h3>Product Completion SKU Mix (% of all appts per prompt)</h3><canvas id="chartSku"></canvas></div>
     <div class="chart-card">
       <h3>SKU Breakdown</h3>
       <table>
@@ -168,25 +197,25 @@
   </div>
 </div>
 
-<!-- Section 5: Start Status at Contact -->
+<!-- Section 5: Filing Status at Contact -->
 <div class="section">
   <h2>5. Filing Status at Time of Contact</h2>
   <div class="insight">
-    <strong>Confirms the VOC findings:</strong> For Option 2, <strong>37.4% of callers had not started before contact</strong> and <strong>26.8% had not started at all in TY25</strong> &mdash; confirming ~85% of Option 2 selectors have <em>not</em> actually completed their taxes. However, these "not started before contact" callers convert at <strong>45.4%</strong> for Option 2 (vs 40.4% for Option 1), the highest completion rate of any segment.
+    <strong>Confirms VOC findings:</strong> ~64% of Option 2 callers had not completed when they called. "Not started before contact" shows the highest conversion across both metrics — <strong>55.5% appt handled and 45.4% product completion</strong> for Opt 2. The "not started in TY25" segment has low appt handled rates (~19-21%) and zero product completions, representing customers who may not file this year.
   </div>
   <div class="chart-grid">
-    <div class="chart-card"><h3>Completion Rate by Filing Status at Contact</h3><canvas id="chartStartStatus"></canvas></div>
+    <div class="chart-card"><h3>Appt Handled vs Product Completion — by Filing Status</h3><canvas id="chartStartStatus"></canvas></div>
     <div class="chart-card">
       <h3>Filing Status Detail</h3>
       <table>
-        <thead><tr><th>Status at Contact</th><th>Prompt</th><th class="num">Appts</th><th class="num">Completed</th><th class="num">Rate</th></tr></thead>
+        <thead><tr><th>Status at Contact</th><th>Prompt</th><th class="num">Appts</th><th class="num col-appt">Handled</th><th class="num col-appt">Rate</th><th class="num col-prod">Completed</th><th class="num col-prod">Rate</th></tr></thead>
         <tbody>
-          <tr><td>Not started before contact</td><td>Opt 1</td><td class="num">988</td><td class="num">399</td><td class="num">40.4%</td></tr>
-          <tr><td>Not started before contact</td><td>Opt 2</td><td class="num">335</td><td class="num">152</td><td class="num highlight">45.4%</td></tr>
-          <tr><td>Started before contact</td><td>Opt 1</td><td class="num">909</td><td class="num">229</td><td class="num">25.2%</td></tr>
-          <tr><td>Started before contact</td><td>Opt 2</td><td class="num">322</td><td class="num">121</td><td class="num highlight">37.6%</td></tr>
-          <tr><td>Not started in TY25</td><td>Opt 1</td><td class="num">521</td><td class="num">0</td><td class="num">0.0%</td></tr>
-          <tr><td>Not started in TY25</td><td>Opt 2</td><td class="num">240</td><td class="num">0</td><td class="num">0.0%</td></tr>
+          <tr><td>Not started before contact</td><td>Opt 1</td><td class="num">988</td><td class="num">548</td><td class="num">55.5%</td><td class="num">399</td><td class="num">40.4%</td></tr>
+          <tr><td>Not started before contact</td><td>Opt 2</td><td class="num">335</td><td class="num">186</td><td class="num">55.5%</td><td class="num">152</td><td class="num highlight">45.4%</td></tr>
+          <tr><td>Started before contact</td><td>Opt 1</td><td class="num">909</td><td class="num">321</td><td class="num">35.3%</td><td class="num">229</td><td class="num">25.2%</td></tr>
+          <tr><td>Started before contact</td><td>Opt 2</td><td class="num">322</td><td class="num">143</td><td class="num highlight">44.4%</td><td class="num">121</td><td class="num highlight">37.6%</td></tr>
+          <tr><td>Not started in TY25</td><td>Opt 1</td><td class="num">521</td><td class="num">98</td><td class="num">18.8%</td><td class="num">0</td><td class="num">0.0%</td></tr>
+          <tr><td>Not started in TY25</td><td>Opt 2</td><td class="num">240</td><td class="num">51</td><td class="num">21.3%</td><td class="num">0</td><td class="num">0.0%</td></tr>
         </tbody>
       </table>
     </div>
@@ -197,119 +226,123 @@
 <div class="section">
   <h2>6. Summary &amp; Recommendation</h2>
   <div class="insight" style="border-left-color: var(--green);">
-    <strong>Bottom line:</strong> Option 2 appointments are <strong>not empty conversions</strong>. They complete at a higher rate (30.5% vs 26.0%) across all appointment types and filing statuses. The data supports <strong>keeping Option 2 routing to Concierge</strong> rather than PS, as these customers &mdash; most of whom have not actually completed &mdash; benefit from the concierge interaction and convert at meaningful rates. The higher DIWM/DIY completion mix for Option 2 also suggests some callers self-serve after their concierge touchpoint, adding incremental value beyond FS conversions alone.
+    <strong>Bottom line:</strong> Option 2 appointments outperform Option 1 on <em>both</em> appointment handling (42.5% vs 40.0%) and product completion (30.5% vs 26.0%). The appointments being scheduled are fulfilled at healthy rates, and the downstream tax filing conversions are meaningful. The data supports <strong>keeping Option 2 routing to Concierge</strong>. Additionally, Option 2's higher DIWM/DIY mix suggests some customers self-file after the concierge interaction, adding value beyond FS conversions alone.
   </div>
 </div>
 
 <div class="footer">
   <p>Data window: 3/13/2026 &ndash; 3/25/2026 &middot; Table: cgan_ustax_published.ae_concierge_mece &middot; Filter: funnel_stage = 'appt sched', prompt IN ('1','2')</p>
+  <p>Appointment Handled = <code>handled_ind = 1</code> &middot; Product Completed = <code>completed_flag = 1</code></p>
   <p>Generated: Mar 26, 2026 &middot; Author: Lanny Huang</p>
 </div>
 
-</div><!-- /container -->
+</div>
 
 <script>
 (function(){
-  var P1 = '#6366f1', P2 = '#f59e0b', P1L = '#a5b4fc', P2L = '#fcd34d';
-  var baseOpts = {
-    responsive: true,
-    plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
-    scales: {
-      x: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { color: 'rgba(51,65,85,0.5)' } },
-      y: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { color: 'rgba(51,65,85,0.3)' } }
+  var P1='#6366f1', P2='#f59e0b', APPT='#22d3ee', PROD='#a78bfa';
+  var base = {
+    responsive:true,
+    plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}}},
+    scales:{
+      x:{ticks:{color:'#94a3b8',font:{size:11}},grid:{color:'rgba(51,65,85,0.5)'}},
+      y:{ticks:{color:'#94a3b8',font:{size:11},callback:function(v){return v+'%';}},grid:{color:'rgba(51,65,85,0.3)'}}
     }
   };
-  function pctOpts(title) {
-    var o = JSON.parse(JSON.stringify(baseOpts));
-    o.scales.y.ticks.callback = function(v){ return v + '%'; };
-    if (title) { o.plugins.title = { display: true, text: title, color: '#f1f5f9', font: { size: 13 } }; }
-    return o;
-  }
+  function opts(){return JSON.parse(JSON.stringify(base));}
 
-  // Chart 1: Overall rates
-  new Chart(document.getElementById('chartOverall'), {
-    type: 'bar',
-    data: {
-      labels: ['Completion Rate', 'Start Rate'],
-      datasets: [
-        { label: 'Option 1', data: [26.04, 78.57], backgroundColor: P1, borderRadius: 4 },
-        { label: 'Option 2', data: [30.50, 73.30], backgroundColor: P2, borderRadius: 4 }
+  // Chart 1: Overall appt handled vs product completion
+  new Chart(document.getElementById('chartOverall'),{
+    type:'bar',
+    data:{
+      labels:['Appt Handled Rate','Product Completion Rate','Product Start Rate'],
+      datasets:[
+        {label:'Option 1',data:[40.01,26.04,78.57],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2',data:[42.46,30.50,73.30],backgroundColor:P2,borderRadius:4}
       ]
     },
-    options: pctOpts()
+    options:opts()
   });
 
-  // Chart 2: Volume
-  new Chart(document.getElementById('chartVolume'), {
-    type: 'bar',
-    data: {
-      labels: ['Total Appts', 'Completed', 'Started'],
-      datasets: [
-        { label: 'Option 1', data: [2412, 628, 1895], backgroundColor: P1, borderRadius: 4 },
-        { label: 'Option 2', data: [895, 273, 656], backgroundColor: P2, borderRadius: 4 }
-      ]
-    },
-    options: baseOpts
-  });
+  // Chart 2: Funnel
+  (function(){
+    var o=opts();
+    o.indexAxis='y';
+    o.scales.x.ticks.callback=function(v){return v.toLocaleString();};
+    delete o.scales.y.ticks.callback;
+    new Chart(document.getElementById('chartFunnel'),{
+      type:'bar',
+      data:{
+        labels:['Scheduled','Appt Handled','Product Started','Product Completed'],
+        datasets:[
+          {label:'Option 1',data:[2412,965,1895,628],backgroundColor:P1,borderRadius:4},
+          {label:'Option 2',data:[895,380,656,273],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o
+    });
+  })();
 
-  // Chart 3: Appt Type completion
-  new Chart(document.getElementById('chartApptType'), {
-    type: 'bar',
-    data: {
-      labels: ['PreAuth In-Person', 'PreAuth Virtual'],
-      datasets: [
-        { label: 'Option 1', data: [26.84, 24.06], backgroundColor: P1, borderRadius: 4 },
-        { label: 'Option 2', data: [31.07, 29.03], backgroundColor: P2, borderRadius: 4 }
-      ]
-    },
-    options: pctOpts('Completion Rate by Appointment Type')
-  });
+  // Chart 3: Appt type — handled and product completion grouped
+  (function(){
+    var o=opts();
+    new Chart(document.getElementById('chartApptTypeHandled'),{
+      type:'bar',
+      data:{
+        labels:['In-Person\nHandled','In-Person\nProd Comp','Virtual\nHandled','Virtual\nProd Comp'],
+        datasets:[
+          {label:'Option 1',data:[32.73,26.84,57.64,24.06],backgroundColor:P1,borderRadius:4},
+          {label:'Option 2',data:[33.23,31.07,66.53,29.03],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o
+    });
+  })();
 
-  // Chart 4: Outcome distribution (stacked)
-  new Chart(document.getElementById('chartOutcome'), {
-    type: 'bar',
-    data: {
-      labels: ['Option 1', 'Option 2'],
-      datasets: [
-        { label: 'Agent Missed (no backup)', data: [1255, 497], backgroundColor: '#ef4444', borderRadius: 2 },
-        { label: 'Future Appt', data: [778, 254], backgroundColor: '#3b82f6', borderRadius: 2 },
-        { label: 'Customer Missed', data: [293, 103], backgroundColor: '#f97316', borderRadius: 2 },
-        { label: 'Orig Agent Joined', data: [86, 41], backgroundColor: '#22c55e', borderRadius: 2 }
-      ]
-    },
-    options: (function(){
-      var o = JSON.parse(JSON.stringify(baseOpts));
-      o.scales.x.stacked = true;
-      o.scales.y.stacked = true;
-      return o;
-    })()
-  });
+  // Chart 4: Outcome product completion
+  (function(){
+    var o=opts();
+    new Chart(document.getElementById('chartOutcome'),{
+      type:'bar',
+      data:{
+        labels:['Agent Missed','Future Appt','Customer Missed','Orig Agent Joined'],
+        datasets:[
+          {label:'Opt 1 Prod Comp %',data:[39.04,3.47,31.74,20.93],backgroundColor:P1,borderRadius:4},
+          {label:'Opt 2 Prod Comp %',data:[40.24,11.42,31.07,29.27],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o
+    });
+  })();
 
   // Chart 5: SKU mix
-  new Chart(document.getElementById('chartSku'), {
-    type: 'bar',
-    data: {
-      labels: ['FS', 'DIWM Non-Basic', 'DIY Paid', 'DIY Free', 'DIWM Basic'],
-      datasets: [
-        { label: 'Option 1 (%)', data: [20.94, 2.13, 1.10, 0.87, 0.63], backgroundColor: P1, borderRadius: 4 },
-        { label: 'Option 2 (%)', data: [18.35, 4.38, 2.40, 2.09, 1.67], backgroundColor: P2, borderRadius: 4 }
+  new Chart(document.getElementById('chartSku'),{
+    type:'bar',
+    data:{
+      labels:['FS','DIWM NB','DIY Paid','DIY Free','DIWM Basic'],
+      datasets:[
+        {label:'Option 1 (%)',data:[20.94,2.13,1.10,0.87,0.63],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2 (%)',data:[18.35,4.38,2.40,2.09,1.67],backgroundColor:P2,borderRadius:4}
       ]
     },
-    options: pctOpts('% of All Appointments per Prompt')
+    options:opts()
   });
 
-  // Chart 6: Start status completion
-  new Chart(document.getElementById('chartStartStatus'), {
-    type: 'bar',
-    data: {
-      labels: ['Not started before contact', 'Started before contact', 'Not started in TY25'],
-      datasets: [
-        { label: 'Option 1', data: [40.38, 25.19, 0], backgroundColor: P1, borderRadius: 4 },
-        { label: 'Option 2', data: [45.37, 37.58, 0], backgroundColor: P2, borderRadius: 4 }
-      ]
-    },
-    options: pctOpts('Completion Rate by Filing Status at Contact')
-  });
+  // Chart 6: Start status — grouped appt handled + product completion
+  (function(){
+    var o=opts();
+    new Chart(document.getElementById('chartStartStatus'),{
+      type:'bar',
+      data:{
+        labels:['Not Started\nAppt Hndl','Not Started\nProd Comp','Started\nAppt Hndl','Started\nProd Comp','Not in TY25\nAppt Hndl','Not in TY25\nProd Comp'],
+        datasets:[
+          {label:'Option 1',data:[55.47,40.38,35.31,25.19,18.81,0],backgroundColor:P1,borderRadius:4},
+          {label:'Option 2',data:[55.52,45.37,44.41,37.58,21.25,0],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o
+    });
+  })();
 })();
 </script>
 </body>
