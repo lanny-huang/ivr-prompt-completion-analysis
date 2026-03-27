@@ -204,34 +204,105 @@
   </div>
 </div>
 
-<!-- Section 5: Routing Framework (Natalie's request) -->
+<!-- Section 5: Natalie's Framework -->
 <div class="section">
-  <h2>5. Full Routing View: Appt Sched + Warm Transfer + PS Transfer</h2>
+  <h2>5. Concierge vs PS Routing Framework</h2>
   <div class="insight">
-    <strong>Option 2 sends 3&times; more customers to PS (31.6% vs 5.3%)</strong>, while Option 1 routes more to Appointments (61.9% vs 39.9%) and Warm Transfers (18.4% vs 15.0%). Concierge-touched paths (Appt + WT) drive higher FS completion rates than PS for both prompts. Warm transfers complete at 20.4% for Opt 1 and 13.6% for Opt 2 &mdash; both higher than PS transfer completion rates.
+    <strong>Concierge-touched paths (Appt + FS Warm Transfer) route 42.7% of Opt 1 vs only 19.6% of Opt 2.</strong> But both drive strong FS conversion: 14.2% FS rate for Opt 1, 11.3% for Opt 2. In contrast, PS Transfer captures 31.6% of Opt 2 traffic but yields only 1.0% FS completion &mdash; the revenue opportunity cost of rerouting to PS is real. "Warm transfer" here refers to <strong>FS warm transfer only</strong> (funnel_stage = 'fs warm transfer').
   </div>
+
+  <!-- Natalie's side-by-side framework -->
   <div class="chart-grid">
-    <div class="chart-card"><h3>Routing Distribution (% of all handled customers)</h3><canvas id="chartRouting"></canvas></div>
-    <div class="chart-card"><h3>Post-Contact Completion Rate by Route &amp; SKU</h3><canvas id="chartRouteSku"></canvas></div>
+    <div class="chart-card">
+      <h3>Natalie&rsquo;s Framework: Concierge vs PS</h3>
+      <table>
+        <thead>
+          <tr><th></th><th class="num" style="color:var(--p1-light);font-size:0.8rem;">Option 1</th><th class="num" style="color:var(--p2-light);font-size:0.8rem;">Option 2</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(99,102,241,0.06);">
+            <td><strong>Appt + FS Warm Transfer rate</strong></td>
+            <td class="num" style="font-size:1.1rem;font-weight:700;">42.7%</td>
+            <td class="num" style="font-size:1.1rem;font-weight:700;">19.6%</td>
+          </tr>
+          <tr>
+            <td style="padding-left:24px;color:var(--green);">&bull; FS complete rate</td>
+            <td class="num" style="color:var(--green);font-weight:600;">14.16%</td>
+            <td class="num" style="color:var(--green);font-weight:600;">11.28%</td>
+          </tr>
+          <tr>
+            <td style="padding-left:24px;color:var(--appt);">&bull; DIWM complete rate</td>
+            <td class="num">1.42%</td>
+            <td class="num">4.13%</td>
+          </tr>
+          <tr>
+            <td style="padding-left:24px;color:var(--p2);">&bull; DIY complete rate</td>
+            <td class="num">0.62%</td>
+            <td class="num">1.79%</td>
+          </tr>
+          <tr style="border-top:2px solid var(--border);background:rgba(248,113,113,0.06);">
+            <td><strong>PS transfer rate</strong></td>
+            <td class="num" style="font-size:1.1rem;font-weight:700;">5.3%</td>
+            <td class="num" style="font-size:1.1rem;font-weight:700;">31.6%</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">
+        Rates are % of <em>all handled customers</em> for that prompt (Opt 1: 319,138 &middot; Opt 2: 224,815).<br>
+        Completion rates are % of customers in that route who completed post-contact.
+      </p>
+    </div>
+    <div class="chart-card"><h3>Concierge (Appt + FS WT) vs PS &mdash; FS Completion Rate</h3><canvas id="chartFramework"></canvas></div>
   </div>
-  <div class="chart-card" style="margin-top:24px;">
-    <h3>Natalie&rsquo;s Framework: Route &times; Prompt &times; SKU Completion Rates</h3>
-    <table>
-      <thead>
-        <tr><th>Route</th><th>Prompt</th><th class="num">Customers</th><th class="num" style="color:var(--green)">FS Rate</th><th class="num" style="color:var(--appt)">DIWM Rate</th><th class="num" style="color:var(--p2)">DIY Rate</th><th class="num col-prod">Total Comp</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Appt Scheduled</td><td>Opt 1</td><td class="num">87,214</td><td class="num">11.6%</td><td class="num">0.7%</td><td class="num">0.1%</td><td class="num">12.4%</td></tr>
-        <tr><td>Appt Scheduled</td><td>Opt 2</td><td class="num">18,242</td><td class="num highlight">18.6%</td><td class="num">2.3%</td><td class="num">0.4%</td><td class="num highlight">21.6%</td></tr>
-        <tr style="border-top:2px solid var(--border)"><td>Warm Transfer</td><td>Opt 1</td><td class="num">58,596</td><td class="num">16.5%</td><td class="num">2.5%</td><td class="num">1.4%</td><td class="num">20.4%</td></tr>
-        <tr><td>Warm Transfer</td><td>Opt 2</td><td class="num">33,623</td><td class="num">5.6%</td><td class="num">4.9%</td><td class="num">2.9%</td><td class="num">13.6%</td></tr>
-        <tr style="border-top:2px solid var(--border)"><td>PS Transfer</td><td>Opt 1</td><td class="num">16,906</td><td class="num">6.4%</td><td class="num">4.6%</td><td class="num">3.5%</td><td class="num">15.0%</td></tr>
-        <tr><td>PS Transfer</td><td>Opt 2</td><td class="num">70,999</td><td class="num">1.0%</td><td class="num">4.2%</td><td class="num">4.5%</td><td class="num">10.0%</td></tr>
-      </tbody>
-    </table>
-    <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">
-      Routing distribution: Opt 1 &rarr; 61.9% Appt, 18.4% WT, 5.3% PS &nbsp;|&nbsp; Opt 2 &rarr; 39.9% Appt, 15.0% WT, 31.6% PS
-    </p>
+
+  <!-- Detailed breakdown table -->
+  <div class="chart-grid" style="margin-top:24px;">
+    <div class="chart-card">
+      <h3>Component Breakdown: Appt Sched vs FS Warm Transfer vs PS Transfer</h3>
+      <table>
+        <thead>
+          <tr><th>Route</th><th class="num" style="color:var(--p1-light)">Opt 1 Customers</th><th class="num" style="color:var(--p1-light)">Opt 1 Comp Rate</th><th class="num" style="color:var(--p2-light)">Opt 2 Customers</th><th class="num" style="color:var(--p2-light)">Opt 2 Comp Rate</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Appt Scheduled</td>
+            <td class="num">87,214</td><td class="num">12.44%</td>
+            <td class="num">18,242</td><td class="num highlight">21.58%</td>
+          </tr>
+          <tr>
+            <td>FS Warm Transfer</td>
+            <td class="num">49,009</td><td class="num">22.93%</td>
+            <td class="num">25,918</td><td class="num">14.40%</td>
+          </tr>
+          <tr style="background:rgba(99,102,241,0.04);">
+            <td><strong>Appt + FS WT Combined</strong></td>
+            <td class="num"><strong>136,223</strong></td><td class="num"><strong>16.21%</strong></td>
+            <td class="num"><strong>44,160</strong></td><td class="num"><strong>17.36%</strong></td>
+          </tr>
+          <tr style="border-top:2px solid var(--border);">
+            <td>PS Transfer</td>
+            <td class="num">16,906</td><td class="num">14.98%</td>
+            <td class="num">70,999</td><td class="num">10.01%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-card">
+      <h3>SKU Completion Rates by Route</h3>
+      <table>
+        <thead>
+          <tr><th>Route</th><th>Prompt</th><th class="num" style="color:var(--green)">FS Rate</th><th class="num" style="color:var(--appt)">DIWM Rate</th><th class="num" style="color:var(--p2)">DIY Rate</th><th class="num col-prod">Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Appt Sched</td><td>Opt 1</td><td class="num">11.64%</td><td class="num">0.71%</td><td class="num">0.09%</td><td class="num">12.44%</td></tr>
+          <tr><td>Appt Sched</td><td>Opt 2</td><td class="num highlight">18.62%</td><td class="num">2.29%</td><td class="num">0.39%</td><td class="num highlight">21.58%</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td>FS Warm Transfer</td><td>Opt 1</td><td class="num">18.63%</td><td class="num">2.70%</td><td class="num">1.57%</td><td class="num">22.93%</td></tr>
+          <tr><td>FS Warm Transfer</td><td>Opt 2</td><td class="num">6.12%</td><td class="num">5.42%</td><td class="num">2.78%</td><td class="num">14.40%</td></tr>
+          <tr style="border-top:2px solid var(--border)"><td>PS Transfer</td><td>Opt 1</td><td class="num">6.41%</td><td class="num">4.55%</td><td class="num">3.50%</td><td class="num">14.98%</td></tr>
+          <tr><td>PS Transfer</td><td>Opt 2</td><td class="num" style="color:var(--red)">1.02%</td><td class="num">4.15%</td><td class="num">4.49%</td><td class="num">10.01%</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -269,16 +340,17 @@
     &bull; <strong>Option 2 appointments are legitimate</strong> &mdash; they're handled and convert at rates comparable to Option 1<br>
     &bull; <strong>"Not started" Opt 2 callers are the best converters</strong> &mdash; 51.5% product completion vs 39.5% for Opt 1, a 12pp lift<br>
     &bull; <strong>FS dominates completers for both prompts</strong> &mdash; 93.6% Opt 1, 86.0% Opt 2 complete as Full Service. Some downgrade (Opt 2 has ~8% DIWM vs 4% Opt 1), but the vast majority convert to FS<br>
-    &bull; <strong>Concierge-routed paths outperform PS</strong> &mdash; Appt Sched and Warm Transfer drive higher FS completion rates than PS Transfer for both prompts<br>
+    &bull; <strong>Concierge paths (Appt + FS WT) outperform PS on FS conversion</strong> &mdash; combined FS rate is 14.2% Opt 1, 11.3% Opt 2 vs PS at 6.4% and 1.0%<br>
     &bull; <strong>Opt 2 PS transfer is the biggest route</strong> &mdash; 31.6% of Opt 2 go to PS (vs 5.3% Opt 1), but PS completions skew DIY/DIWM with only 1.0% FS rate<br>
-    &bull; <strong>Recommendation: keep Option 2 routing to Concierge</strong> &mdash; concierge-touched appointments and warm transfers are productive, drive FS revenue, and outperform PS transfer outcomes
+    &bull; <strong>Recommendation: keep Option 2 routing to Concierge as long as possible</strong> &mdash; every Opt 2 customer that gets an appt (18.6% FS rate) or FS warm transfer (6.1% FS rate) is worth far more than the PS alternative (1.0% FS rate)
   </div>
 </div>
 
 <div class="footer">
-  <p>Data window: 3/13/2026 &ndash; 3/25/2026 &middot; Table: cgan_ustax_published.ae_concierge_mece &middot; Filter: funnel_stage = 'appt sched', prompt IN ('1','2')</p>
+  <p>Data window: 3/13/2026 &ndash; 3/25/2026 &middot; Table: cgan_ustax_published.ae_concierge_mece &middot; prompt IN ('1','2')</p>
   <p>Post-contact filter: <code>current_schedule_ts &ge; contact_start_ts</code> for appointments; <code>pam_complete_date &ge; DATE(contact_start_ts)</code> for product completion</p>
   <p>Appointment Handled = <code>handled_ind = 1</code> &middot; Product Completed = <code>completed_flag = 1</code></p>
+  <p>Section 5 "warm transfer" = <code>funnel_stage = 'fs warm transfer'</code> (FS warm transfers only)</p>
   <p>Generated: Mar 27, 2026 &middot; Author: Lanny Huang</p>
 </div>
 
@@ -363,30 +435,18 @@
     options:opts()
   });
 
-  new Chart(document.getElementById('chartRouting'),{
-    type:'bar',
-    data:{
-      labels:['Appt Scheduled','Warm Transfer','PS Transfer'],
-      datasets:[
-        {label:'Option 1 (%)',data:[61.9,18.4,5.3],backgroundColor:P1,borderRadius:4},
-        {label:'Option 2 (%)',data:[39.9,15.0,31.6],backgroundColor:P2,borderRadius:4}
-      ]
-    },
-    options:opts()
-  });
-
   (function(){
     var o2=opts();
     o2.plugins.legend={labels:{color:'#94a3b8',font:{size:10}}};
-    var FS='#34d399',DIWM='#22d3ee',DIY='#f59e0b';
-    new Chart(document.getElementById('chartRouteSku'),{
+    var FS='#34d399',DIWM='#22d3ee',DIY='#f59e0b',PS='#f87171';
+    new Chart(document.getElementById('chartFramework'),{
       type:'bar',
       data:{
-        labels:['Opt1\nAppt','Opt2\nAppt','Opt1\nWT','Opt2\nWT','Opt1\nPS','Opt2\nPS'],
+        labels:['Appt+FS WT\nOpt 1','Appt+FS WT\nOpt 2','PS Transfer\nOpt 1','PS Transfer\nOpt 2'],
         datasets:[
-          {label:'FS Rate',data:[11.6,18.6,16.5,5.6,6.4,1.0],backgroundColor:FS,borderRadius:4},
-          {label:'DIWM Rate',data:[0.7,2.3,2.5,4.9,4.6,4.2],backgroundColor:DIWM,borderRadius:4},
-          {label:'DIY Rate',data:[0.1,0.4,1.4,2.9,3.5,4.5],backgroundColor:DIY,borderRadius:4}
+          {label:'FS Rate',data:[14.16,11.28,6.41,1.02],backgroundColor:FS,borderRadius:4},
+          {label:'DIWM Rate',data:[1.42,4.13,4.55,4.15],backgroundColor:DIWM,borderRadius:4},
+          {label:'DIY Rate',data:[0.62,1.79,3.50,4.49],backgroundColor:DIY,borderRadius:4}
         ]
       },
       options:o2
