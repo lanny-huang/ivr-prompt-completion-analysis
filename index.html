@@ -104,19 +104,19 @@
 
 <!-- KPI Row -->
 <div class="kpi-row">
-  <div class="kpi p1"><div class="label">Opt 1 Appt Handled</div><div class="value">40.6%</div><div class="detail">1,033 / 2,546</div></div>
-  <div class="kpi p2"><div class="label">Opt 2 Appt Handled</div><div class="value">40.6%</div><div class="detail">360 / 887</div></div>
-  <div class="kpi delta"><div class="label">Appt Handled &Delta;</div><div class="value">~0pp</div><div class="detail">Equivalent</div></div>
-  <div class="kpi p1"><div class="label">Opt 1 Product Comp</div><div class="value">24.0%</div><div class="detail">610 / 2,546</div></div>
-  <div class="kpi p2"><div class="label">Opt 2 Product Comp</div><div class="value">25.5%</div><div class="detail">226 / 887</div></div>
-  <div class="kpi delta"><div class="label">Product Comp &Delta;</div><div class="value">+1.5pp</div><div class="detail">Opt 2 slightly higher</div></div>
+  <div class="kpi p1"><div class="label">Opt 1 Appt Handled</div><div class="value">37.2%</div><div class="detail">350,185 / 940,689</div></div>
+  <div class="kpi p2"><div class="label">Opt 2 Appt Handled</div><div class="value">32.0%</div><div class="detail">246,812 / 772,261</div></div>
+  <div class="kpi delta"><div class="label">Appt Handled &Delta;</div><div class="value">-5.3pp</div><div class="detail">Opt 1 higher</div></div>
+  <div class="kpi p1"><div class="label">Opt 1 Product Comp</div><div class="value">20.8%</div><div class="detail">195,324 / 940,689</div></div>
+  <div class="kpi p2"><div class="label">Opt 2 Product Comp</div><div class="value">17.0%</div><div class="detail">131,397 / 772,261</div></div>
+  <div class="kpi delta"><div class="label">Product Comp &Delta;</div><div class="value">-3.8pp</div><div class="detail">Opt 1 higher</div></div>
 </div>
 
 <!-- Section 1: Overall Comparison -->
 <div class="section">
   <h2>1. Overall: Post-Contact Appointment Handled vs Product Completion</h2>
   <div class="insight">
-    <strong>With proper post-contact filtering, the gap narrows.</strong> Appointment handled rates are virtually identical (~40.6% for both). Product completion is slightly higher for Opt 2 (25.5% vs 24.0%, +1.5pp), but much closer than the pre-correction analysis suggested. Product start rates are also comparable (Opt 1: 39.9%, Opt 2: 35.5%).
+    <strong>With the full post-IVR-change data window, Option 1 outperforms on both metrics.</strong> Appointment handled rates are 37.2% for Opt 1 vs 32.0% for Opt 2 (-5.3pp). Product completion is 20.8% vs 17.0% (-3.8pp). Product start rates: Opt 1: 37.3%, Opt 2: 29.7%.
   </div>
   <div class="chart-grid">
     <div class="chart-card"><h3>Appt Handled vs Product Completion &mdash; by Prompt</h3><canvas id="chartOverall"></canvas></div>
@@ -128,7 +128,7 @@
 <div class="section">
   <h2>2. By Appointment Type</h2>
   <div class="insight">
-    <strong>Virtual appointments are handled far more often</strong> (~58-65%) than In-Person (~34%), but In-Person converts to product completion at a higher rate. Option 2 shows a slight edge on product completion for both In-Person (26.6% vs 25.3%) and Virtual (21.6% vs 20.2%).
+    <strong>Virtual appointments are handled far more often</strong> (~54-61%) than In-Person (~26-30%), but In-Person converts to product completion at a higher rate. Option 1 shows a meaningful edge on product completion for In-Person (20.9% vs 15.3%), while Option 2 leads on Virtual completion (24.9% vs 20.5%).
   </div>
   <div class="chart-grid">
     <div class="chart-card"><h3>Appt Handled &amp; Product Completion by Type</h3><canvas id="chartApptType"></canvas></div>
@@ -137,10 +137,10 @@
       <table>
         <thead><tr><th>Type</th><th>Prompt</th><th class="num">Appts</th><th class="num col-appt">Handled</th><th class="num col-appt">Rate</th><th class="num col-prod">Completed</th><th class="num col-prod">Rate</th></tr></thead>
         <tbody>
-          <tr><td>PreAuth In-Person</td><td>Opt 1</td><td class="num">1,869</td><td class="num">640</td><td class="num">34.2%</td><td class="num">473</td><td class="num">25.3%</td></tr>
-          <tr><td>PreAuth In-Person</td><td>Opt 2</td><td class="num">688</td><td class="num">231</td><td class="num">33.6%</td><td class="num">183</td><td class="num highlight">26.6%</td></tr>
-          <tr><td>PreAuth Virtual</td><td>Opt 1</td><td class="num">673</td><td class="num">389</td><td class="num">57.8%</td><td class="num">136</td><td class="num">20.2%</td></tr>
-          <tr><td>PreAuth Virtual</td><td>Opt 2</td><td class="num">199</td><td class="num">129</td><td class="num highlight">64.8%</td><td class="num">43</td><td class="num highlight">21.6%</td></tr>
+          <tr><td>PreAuth In-Person</td><td>Opt 1</td><td class="num">646,539</td><td class="num">191,794</td><td class="num">29.7%</td><td class="num">135,032</td><td class="num">20.9%</td></tr>
+          <tr><td>PreAuth In-Person</td><td>Opt 2</td><td class="num">637,653</td><td class="num">164,279</td><td class="num">25.8%</td><td class="num">97,870</td><td class="num">15.3%</td></tr>
+          <tr><td>PreAuth Virtual</td><td>Opt 1</td><td class="num">294,150</td><td class="num">158,391</td><td class="num">53.9%</td><td class="num">60,292</td><td class="num">20.5%</td></tr>
+          <tr><td>PreAuth Virtual</td><td>Opt 2</td><td class="num">134,608</td><td class="num">82,533</td><td class="num highlight">61.3%</td><td class="num">33,527</td><td class="num highlight">24.9%</td></tr>
         </tbody>
       </table>
     </div>
@@ -151,7 +151,7 @@
 <div class="section">
   <h2>3. Appointment Outcome Distribution</h2>
   <div class="insight">
-    <strong>"Agent missed" remains the most common outcome</strong> (~56-61%) and drives the bulk of product completions (36.1% Opt 1, 35.7% Opt 2). Both prompts perform similarly across all outcomes. <strong>"Orig agent joined"</strong> has 100% appt handled but lower product completion (18.8% Opt 1, 23.5% Opt 2).
+    <strong>"Agent missed" has the highest completion rate among outcome types</strong> (39.9% Opt 1 vs 29.3% Opt 2, a significant +10.6pp advantage for Opt 1). <strong>"Orig agent joined"</strong> has 100% appt handled with similar completion (~33%). "Customer Missed" favors Opt 2 (19.9% vs 13.4%). The "Other" category covers nearly half of all appointments in both options.
   </div>
   <div class="chart-grid">
     <div class="chart-card"><h3>Product Completion Rate by Outcome</h3><canvas id="chartOutcome"></canvas></div>
@@ -160,14 +160,16 @@
       <table>
         <thead><tr><th>Outcome</th><th>Prompt</th><th class="num">Appts</th><th class="num col-appt">Handled</th><th class="num col-prod">Prod Comp</th><th class="num col-prod">Rate</th></tr></thead>
         <tbody>
-          <tr><td>Agent Missed (no backup)</td><td>Opt 1</td><td class="num">1,416</td><td class="num">747</td><td class="num">511</td><td class="num">36.1%</td></tr>
-          <tr><td>Agent Missed (no backup)</td><td>Opt 2</td><td class="num">538</td><td class="num">267</td><td class="num">192</td><td class="num">35.7%</td></tr>
-          <tr><td>Future Appt</td><td>Opt 1</td><td class="num">766</td><td class="num">1</td><td class="num">5</td><td class="num">0.7%</td></tr>
-          <tr><td>Future Appt</td><td>Opt 2</td><td class="num">232</td><td class="num">0</td><td class="num">4</td><td class="num">1.7%</td></tr>
-          <tr><td>Customer Missed</td><td>Opt 1</td><td class="num">279</td><td class="num">200</td><td class="num">78</td><td class="num">28.0%</td></tr>
-          <tr><td>Customer Missed</td><td>Opt 2</td><td class="num">83</td><td class="num">59</td><td class="num">22</td><td class="num">26.5%</td></tr>
-          <tr><td>Orig Agent Joined</td><td>Opt 1</td><td class="num">85</td><td class="num">85</td><td class="num">16</td><td class="num">18.8%</td></tr>
-          <tr><td>Orig Agent Joined</td><td>Opt 2</td><td class="num">34</td><td class="num">34</td><td class="num">8</td><td class="num highlight">23.5%</td></tr>
+          <tr><td>Agent Missed (no backup)</td><td>Opt 1</td><td class="num">130,209</td><td class="num">130,209</td><td class="num">51,969</td><td class="num">39.9%</td></tr>
+          <tr><td>Agent Missed (no backup)</td><td>Opt 2</td><td class="num">121,944</td><td class="num">121,944</td><td class="num">35,780</td><td class="num">29.3%</td></tr>
+          <tr><td>Customer Missed</td><td>Opt 1</td><td class="num">163,159</td><td class="num">25,463</td><td class="num">21,901</td><td class="num">13.4%</td></tr>
+          <tr><td>Customer Missed</td><td>Opt 2</td><td class="num">73,268</td><td class="num">16,031</td><td class="num">14,601</td><td class="num highlight">19.9%</td></tr>
+          <tr><td>Future Appt</td><td>Opt 1</td><td class="num">1,018</td><td class="num">0</td><td class="num">18</td><td class="num">1.8%</td></tr>
+          <tr><td>Future Appt</td><td>Opt 2</td><td class="num">1,381</td><td class="num">0</td><td class="num">6</td><td class="num">0.4%</td></tr>
+          <tr><td>Orig Agent Joined</td><td>Opt 1</td><td class="num">194,513</td><td class="num">194,513</td><td class="num">64,659</td><td class="num">33.2%</td></tr>
+          <tr><td>Orig Agent Joined</td><td>Opt 2</td><td class="num">108,837</td><td class="num">108,837</td><td class="num">35,759</td><td class="num">32.9%</td></tr>
+          <tr><td>Other</td><td>Opt 1</td><td class="num">451,790</td><td class="num">0</td><td class="num">56,777</td><td class="num">12.6%</td></tr>
+          <tr><td>Other</td><td>Opt 2</td><td class="num">466,831</td><td class="num">0</td><td class="num">45,251</td><td class="num">9.7%</td></tr>
         </tbody>
       </table>
     </div>
@@ -178,7 +180,7 @@
 <div class="section">
   <h2>4. Of Those Who Completed &mdash; What SKU Did They File?</h2>
   <div class="insight">
-    <strong>Among post-contact appointment completers, FS dominates both prompts</strong> &mdash; 93.6% for Opt 1, 86.0% for Opt 2. So yes, some Opt 2 customers "downgrade": 7.9% complete as DIWM vs 4.2% for Opt 1, and DIY is slightly higher too (1.9% vs 0.7%). But the vast majority convert to Full Service regardless of prompt.
+    <strong>Among completers, FS still dominates Opt 1 (71.8%) but less so for Opt 2 (55.3%).</strong> Opt 2 shows meaningful shift toward DIWM (19.4% vs 13.5%) and DIY (23.5% vs 11.5%). The FS concentration gap of 16.5pp is a significant revenue mix difference.
   </div>
   <div class="chart-grid">
     <div class="chart-card"><h3>SKU Mix of Completers (% of those who completed)</h3><canvas id="chartSkuCompleters"></canvas></div>
@@ -187,19 +189,23 @@
       <table>
         <thead><tr><th>SKU</th><th>Prompt</th><th class="num">Completers</th><th class="num">% of Completers</th></tr></thead>
         <tbody>
-          <tr><td>Full Service</td><td>Opt 1</td><td class="num">10,155</td><td class="num highlight">93.6%</td></tr>
-          <tr><td>Full Service</td><td>Opt 2</td><td class="num">3,314</td><td class="num highlight">86.0%</td></tr>
-          <tr><td>DIWM Non-Basic</td><td>Opt 1</td><td class="num">452</td><td class="num">4.2%</td></tr>
-          <tr><td>DIWM Non-Basic</td><td>Opt 2</td><td class="num">305</td><td class="num">7.9%</td></tr>
-          <tr><td>DIWM Basic</td><td>Opt 1</td><td class="num">165</td><td class="num">1.5%</td></tr>
-          <tr><td>DIWM Basic</td><td>Opt 2</td><td class="num">112</td><td class="num">2.9%</td></tr>
-          <tr><td>DIY Paid</td><td>Opt 1</td><td class="num">64</td><td class="num">0.6%</td></tr>
-          <tr><td>DIY Paid</td><td>Opt 2</td><td class="num">33</td><td class="num">0.9%</td></tr>
-          <tr><td>DIY Free</td><td>Opt 1</td><td class="num">15</td><td class="num">0.1%</td></tr>
-          <tr><td>DIY Free</td><td>Opt 2</td><td class="num">39</td><td class="num">1.0%</td></tr>
+          <tr><td>Full Service</td><td>Opt 1</td><td class="num">263,919</td><td class="num highlight">71.8%</td></tr>
+          <tr><td>Full Service</td><td>Opt 2</td><td class="num">164,666</td><td class="num highlight">55.3%</td></tr>
+          <tr><td>DIWM Non-Basic</td><td>Opt 1</td><td class="num">36,493</td><td class="num">9.9%</td></tr>
+          <tr><td>DIWM Non-Basic</td><td>Opt 2</td><td class="num">41,933</td><td class="num">14.1%</td></tr>
+          <tr><td>DIWM Basic</td><td>Opt 1</td><td class="num">13,246</td><td class="num">3.6%</td></tr>
+          <tr><td>DIWM Basic</td><td>Opt 2</td><td class="num">15,775</td><td class="num">5.3%</td></tr>
+          <tr><td>DIY Paid</td><td>Opt 1</td><td class="num">29,716</td><td class="num">8.1%</td></tr>
+          <tr><td>DIY Paid</td><td>Opt 2</td><td class="num">49,934</td><td class="num">16.8%</td></tr>
+          <tr><td>DIY Free</td><td>Opt 1</td><td class="num">12,588</td><td class="num">3.4%</td></tr>
+          <tr><td>DIY Free</td><td>Opt 2</td><td class="num">19,968</td><td class="num">6.7%</td></tr>
+          <tr><td>BizTax Personal</td><td>Opt 1</td><td class="num">10,198</td><td class="num">2.8%</td></tr>
+          <tr><td>BizTax Personal</td><td>Opt 2</td><td class="num">1,798</td><td class="num">0.6%</td></tr>
+          <tr><td>Other</td><td>Opt 1</td><td class="num">1,579</td><td class="num">0.4%</td></tr>
+          <tr><td>Other</td><td>Opt 2</td><td class="num">3,848</td><td class="num">1.3%</td></tr>
         </tbody>
       </table>
-      <p style="font-size:0.75rem;color:var(--muted);margin-top:8px;">Total completers: Opt 1 = 10,851 &middot; Opt 2 = 3,854</p>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:8px;">Total completers: Opt 1 = 367,739 &middot; Opt 2 = 297,922</p>
     </div>
   </div>
 </div>
@@ -208,7 +214,7 @@
 <div class="section">
   <h2>5. Concierge vs PS Routing Framework</h2>
   <div class="insight">
-    <strong>Concierge-touched paths (Appt + FS Warm Transfer) route 42.7% of Opt 1 vs only 19.6% of Opt 2.</strong> But both drive strong FS conversion: 14.2% FS rate for Opt 1, 11.3% for Opt 2. In contrast, PS Transfer captures 31.6% of Opt 2 traffic but yields only 1.0% FS completion &mdash; the revenue opportunity cost of rerouting to PS is real. "Warm transfer" here refers to <strong>FS warm transfer only</strong> (funnel_stage = 'fs warm transfer').
+    <strong>Concierge-touched paths (Appt + FS Warm Transfer) route 61.0% of Opt 1 vs only 37.0% of Opt 2.</strong> Combined concierge completion rate: 42.5% Opt 1 vs 37.6% Opt 2. PS Transfer captures 29.5% of Opt 2 traffic but yields only 1.0% FS completion &mdash; the revenue opportunity cost of rerouting to PS is real. "Warm transfer" here refers to <strong>FS warm transfer only</strong> (funnel_stage = 'fs warm transfer').
   </div>
 
   <!-- Natalie's side-by-side framework -->
@@ -221,34 +227,34 @@
         </thead>
         <tbody>
           <tr style="background:rgba(99,102,241,0.06);">
-            <td><strong>Appt + FS Warm Transfer rate</strong></td>
-            <td class="num" style="font-size:1.1rem;font-weight:700;">42.7%</td>
-            <td class="num" style="font-size:1.1rem;font-weight:700;">19.6%</td>
+            <td><strong>Concierge rate</strong></td>
+            <td class="num" style="font-size:1.1rem;font-weight:700;">61.0%</td>
+            <td class="num" style="font-size:1.1rem;font-weight:700;">37.0%</td>
           </tr>
           <tr>
             <td style="padding-left:24px;color:var(--green);">&bull; FS complete rate</td>
-            <td class="num" style="color:var(--green);font-weight:600;">14.16%</td>
-            <td class="num" style="color:var(--green);font-weight:600;">11.28%</td>
+            <td class="num" style="color:var(--green);font-weight:600;">34.25%</td>
+            <td class="num" style="color:var(--green);font-weight:600;">26.11%</td>
           </tr>
           <tr>
             <td style="padding-left:24px;color:var(--appt);">&bull; DIWM complete rate</td>
-            <td class="num">1.42%</td>
-            <td class="num">4.13%</td>
+            <td class="num">4.53%</td>
+            <td class="num">5.81%</td>
           </tr>
           <tr>
             <td style="padding-left:24px;color:var(--p2);">&bull; DIY complete rate</td>
-            <td class="num">0.62%</td>
-            <td class="num">1.79%</td>
+            <td class="num">3.37%</td>
+            <td class="num">5.25%</td>
           </tr>
           <tr style="border-top:2px solid var(--border);background:rgba(248,113,113,0.06);">
             <td><strong>PS transfer rate</strong></td>
-            <td class="num" style="font-size:1.1rem;font-weight:700;">5.3%</td>
-            <td class="num" style="font-size:1.1rem;font-weight:700;">31.6%</td>
+            <td class="num" style="font-size:1.1rem;font-weight:700;">9.6%</td>
+            <td class="num" style="font-size:1.1rem;font-weight:700;">29.5%</td>
           </tr>
         </tbody>
       </table>
       <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">
-        Rates are % of <em>all handled customers</em> for that prompt (Opt 1: 319,138 &middot; Opt 2: 224,815).<br>
+        Rates are % of <em>all framework customers</em> for that prompt (Opt 1: 49,149 &middot; Opt 2: 57,357).<br>
         Completion rates are % of customers in that route who completed post-contact.
       </p>
     </div>
@@ -266,23 +272,23 @@
         <tbody>
           <tr>
             <td>Appt Scheduled</td>
-            <td class="num">87,214</td><td class="num">12.44%</td>
-            <td class="num">18,242</td><td class="num highlight">21.58%</td>
+            <td class="num">23,941</td><td class="num">44.28%</td>
+            <td class="num">15,932</td><td class="num">40.20%</td>
           </tr>
           <tr>
             <td>FS Warm Transfer</td>
-            <td class="num">49,009</td><td class="num">22.93%</td>
-            <td class="num">25,918</td><td class="num">14.40%</td>
+            <td class="num">6,081</td><td class="num">35.64%</td>
+            <td class="num">5,307</td><td class="num">29.96%</td>
           </tr>
           <tr style="background:rgba(99,102,241,0.04);">
             <td><strong>Appt + FS WT Combined</strong></td>
-            <td class="num"><strong>136,223</strong></td><td class="num"><strong>16.21%</strong></td>
-            <td class="num"><strong>44,160</strong></td><td class="num"><strong>17.36%</strong></td>
+            <td class="num"><strong>30,022</strong></td><td class="num"><strong>42.53%</strong></td>
+            <td class="num"><strong>21,239</strong></td><td class="num"><strong>37.64%</strong></td>
           </tr>
           <tr style="border-top:2px solid var(--border);">
             <td>PS Transfer</td>
-            <td class="num">16,906</td><td class="num">14.98%</td>
-            <td class="num">70,999</td><td class="num">10.01%</td>
+            <td class="num">2,729</td><td class="num">18.54%</td>
+            <td class="num">14,553</td><td class="num">18.73%</td>
           </tr>
         </tbody>
       </table>
@@ -294,12 +300,12 @@
           <tr><th>Route</th><th>Prompt</th><th class="num" style="color:var(--green)">FS Rate</th><th class="num" style="color:var(--appt)">DIWM Rate</th><th class="num" style="color:var(--p2)">DIY Rate</th><th class="num col-prod">Total</th></tr>
         </thead>
         <tbody>
-          <tr><td>Appt Sched</td><td>Opt 1</td><td class="num">11.64%</td><td class="num">0.71%</td><td class="num">0.09%</td><td class="num">12.44%</td></tr>
-          <tr><td>Appt Sched</td><td>Opt 2</td><td class="num highlight">18.62%</td><td class="num">2.29%</td><td class="num">0.39%</td><td class="num highlight">21.58%</td></tr>
-          <tr style="border-top:1px solid var(--border)"><td>FS Warm Transfer</td><td>Opt 1</td><td class="num">18.63%</td><td class="num">2.70%</td><td class="num">1.57%</td><td class="num">22.93%</td></tr>
-          <tr><td>FS Warm Transfer</td><td>Opt 2</td><td class="num">6.12%</td><td class="num">5.42%</td><td class="num">2.78%</td><td class="num">14.40%</td></tr>
-          <tr style="border-top:2px solid var(--border)"><td>PS Transfer</td><td>Opt 1</td><td class="num">6.41%</td><td class="num">4.55%</td><td class="num">3.50%</td><td class="num">14.98%</td></tr>
-          <tr><td>PS Transfer</td><td>Opt 2</td><td class="num" style="color:var(--red)">1.02%</td><td class="num">4.15%</td><td class="num">4.49%</td><td class="num">10.01%</td></tr>
+          <tr><td>Appt Sched</td><td>Opt 1</td><td class="num">36.90%</td><td class="num">4.10%</td><td class="num">2.96%</td><td class="num">44.28%</td></tr>
+          <tr><td>Appt Sched</td><td>Opt 2</td><td class="num">31.28%</td><td class="num">4.88%</td><td class="num">3.65%</td><td class="num">40.20%</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td>FS Warm Transfer</td><td>Opt 1</td><td class="num">23.80%</td><td class="num">6.25%</td><td class="num">5.00%</td><td class="num">35.64%</td></tr>
+          <tr><td>FS Warm Transfer</td><td>Opt 2</td><td class="num">10.61%</td><td class="num">8.59%</td><td class="num">10.06%</td><td class="num">29.96%</td></tr>
+          <tr style="border-top:2px solid var(--border)"><td>PS Transfer</td><td>Opt 1</td><td class="num">3.92%</td><td class="num">6.19%</td><td class="num">7.59%</td><td class="num">18.54%</td></tr>
+          <tr><td>PS Transfer</td><td>Opt 2</td><td class="num" style="color:var(--red)">1.00%</td><td class="num">6.67%</td><td class="num">10.30%</td><td class="num">18.73%</td></tr>
         </tbody>
       </table>
     </div>
@@ -310,7 +316,7 @@
 <div class="section">
   <h2>6. Filing Status at Time of Contact</h2>
   <div class="insight">
-    <strong>The standout finding:</strong> Among "not started before contact" customers, Option 2 shows a <strong>51.5% product completion rate</strong> vs 39.5% for Option 1 &mdash; a 12pp gap. These are customers who hadn't begun filing, selected the "already filed" IVR option, and yet convert at the highest rate of any segment after the concierge interaction. For "started before contact," Opt 1 slightly outperforms (20.0% vs 17.7%).
+    <strong>"Not started in TY25" is a tiny but interesting segment:</strong> Opt 2 has higher handled rate (70.2% vs 57.2%) but lower completion (34.2% vs 53.7%). The bulk of volume is in "started" customers, where Opt 1 leads on both handled (36.8% vs 31.5%) and completion (21.9% vs 17.9%).
   </div>
   <div class="chart-grid">
     <div class="chart-card"><h3>Appt Handled vs Product Completion &mdash; by Filing Status</h3><canvas id="chartStartStatus"></canvas></div>
@@ -319,12 +325,12 @@
       <table>
         <thead><tr><th>Status at Contact</th><th>Prompt</th><th class="num">Appts</th><th class="num col-appt">Handled</th><th class="num col-appt">Rate</th><th class="num col-prod">Completed</th><th class="num col-prod">Rate</th></tr></thead>
         <tbody>
-          <tr><td>Not started before contact</td><td>Opt 1</td><td class="num">1,065</td><td class="num">597</td><td class="num">56.1%</td><td class="num">421</td><td class="num">39.5%</td></tr>
-          <tr><td>Not started before contact</td><td>Opt 2</td><td class="num">332</td><td class="num">181</td><td class="num">54.5%</td><td class="num">171</td><td class="num highlight">51.5%</td></tr>
-          <tr><td>Started before contact</td><td>Opt 1</td><td class="num">945</td><td class="num">330</td><td class="num">34.9%</td><td class="num">189</td><td class="num">20.0%</td></tr>
-          <tr><td>Started before contact</td><td>Opt 2</td><td class="num">311</td><td class="num">131</td><td class="num highlight">42.1%</td><td class="num">55</td><td class="num">17.7%</td></tr>
-          <tr><td>Not started in TY25</td><td>Opt 1</td><td class="num">540</td><td class="num">108</td><td class="num">20.0%</td><td class="num">0</td><td class="num">0.0%</td></tr>
-          <tr><td>Not started in TY25</td><td>Opt 2</td><td class="num">246</td><td class="num">48</td><td class="num">19.5%</td><td class="num">0</td><td class="num">0.0%</td></tr>
+          <tr><td>Not started in TY25</td><td>Opt 1</td><td class="num">376</td><td class="num">215</td><td class="num">57.2%</td><td class="num">202</td><td class="num">53.7%</td></tr>
+          <tr><td>Not started in TY25</td><td>Opt 2</td><td class="num">392</td><td class="num">275</td><td class="num highlight">70.2%</td><td class="num">134</td><td class="num">34.2%</td></tr>
+          <tr><td>Not started</td><td>Opt 1</td><td class="num">47,641</td><td class="num">21,112</td><td class="num">44.3%</td><td class="num">0</td><td class="num">0.0%</td></tr>
+          <tr><td>Not started</td><td>Opt 2</td><td class="num">38,302</td><td class="num">15,419</td><td class="num">40.3%</td><td class="num">0</td><td class="num">0.0%</td></tr>
+          <tr><td>Started</td><td>Opt 1</td><td class="num">892,672</td><td class="num">328,858</td><td class="num">36.8%</td><td class="num">195,122</td><td class="num">21.9%</td></tr>
+          <tr><td>Started</td><td>Opt 2</td><td class="num">733,567</td><td class="num">231,118</td><td class="num">31.5%</td><td class="num">131,263</td><td class="num">17.9%</td></tr>
         </tbody>
       </table>
     </div>
@@ -335,23 +341,23 @@
 <div class="section">
   <h2>7. Summary &amp; Recommendation</h2>
   <div class="insight" style="border-left-color: var(--green);">
-    <strong>Bottom line (corrected for post-contact only):</strong> When properly filtering to only post-contact appointments and completions, Option 1 and Option 2 perform <strong>very similarly</strong> on appointment handling (~40.6% each) and product completion (24.0% vs 25.5%). The story is more nuanced than the uncorrected data suggested:
+    <strong>Bottom line (full season data):</strong> With the complete data window, Option 1 meaningfully outperforms Option 2 on both appointment handling (37.2% vs 32.0%, -5.3pp) and product completion (20.8% vs 17.0%, -3.8pp). Key findings:
     <br><br>
-    &bull; <strong>Option 2 appointments are legitimate</strong> &mdash; they're handled and convert at rates comparable to Option 1<br>
-    &bull; <strong>"Not started" Opt 2 callers are the best converters</strong> &mdash; 51.5% product completion vs 39.5% for Opt 1, a 12pp lift<br>
-    &bull; <strong>FS dominates completers for both prompts</strong> &mdash; 93.6% Opt 1, 86.0% Opt 2 complete as Full Service. Some downgrade (Opt 2 has ~8% DIWM vs 4% Opt 1), but the vast majority convert to FS<br>
-    &bull; <strong>Concierge paths (Appt + FS WT) outperform PS on FS conversion</strong> &mdash; combined FS rate is 14.2% Opt 1, 11.3% Opt 2 vs PS at 6.4% and 1.0%<br>
-    &bull; <strong>Opt 2 PS transfer is the biggest route</strong> &mdash; 31.6% of Opt 2 go to PS (vs 5.3% Opt 1), but PS completions skew DIY/DIWM with only 1.0% FS rate<br>
-    &bull; <strong>Recommendation: keep Option 2 routing to Concierge as long as possible</strong> &mdash; every Opt 2 customer that gets an appt (18.6% FS rate) or FS warm transfer (6.1% FS rate) is worth far more than the PS alternative (1.0% FS rate)
+    &bull; <strong>Option 1 drives higher FS concentration</strong> &mdash; 71.8% of Opt 1 completers file as Full Service vs 55.3% for Opt 2. The 16.5pp FS mix gap has significant revenue implications<br>
+    &bull; <strong>Opt 2 shifts volume to lower-value SKUs</strong> &mdash; DIY is 23.5% of Opt 2 completers vs 11.5% for Opt 1; DIWM is 19.4% vs 13.5%<br>
+    &bull; <strong>Concierge paths strongly favor Opt 1</strong> &mdash; 61.0% of Opt 1 goes through concierge vs 37.0% for Opt 2, with combined FS rate of 34.3% vs 26.1%<br>
+    &bull; <strong>Opt 2 PS transfer captures ~30% of traffic</strong> &mdash; but yields only 1.0% FS completion. The revenue opportunity cost of rerouting to PS remains substantial<br>
+    &bull; <strong>Agent Missed outcome is a key differentiator</strong> &mdash; Opt 1 achieves 39.9% completion vs 29.3% for Opt 2, a 10.6pp gap<br>
+    &bull; <strong>Recommendation: Option 1 is the higher-performing prompt</strong> &mdash; it drives more appointments through concierge, achieves higher FS conversion, and yields a significantly richer SKU mix
   </div>
 </div>
 
 <div class="footer">
-  <p>Data window: 3/13/2026 &ndash; 3/25/2026 &middot; Table: cgan_ustax_published.ae_concierge_mece &middot; prompt IN ('1','2')</p>
+  <p>Data window: Full season &middot; Table: cgan_ustax_published.ae_concierge_mece &middot; prompt IN ('1','2')</p>
   <p>Post-contact filter: <code>current_schedule_ts &ge; contact_start_ts</code> for appointments; <code>pam_complete_date &ge; DATE(contact_start_ts)</code> for product completion</p>
   <p>Appointment Handled = <code>handled_ind = 1</code> &middot; Product Completed = <code>completed_flag = 1</code></p>
   <p>Section 5 "warm transfer" = <code>funnel_stage = 'fs warm transfer'</code> (FS warm transfers only)</p>
-  <p>Generated: Mar 27, 2026 &middot; Author: Lanny Huang</p>
+  <p>Generated: Mar 30, 2026 &middot; Author: Lanny Huang</p>
 </div>
 
 </div>
@@ -374,8 +380,8 @@
     data:{
       labels:['Appt Handled Rate','Product Completion Rate','Product Start Rate'],
       datasets:[
-        {label:'Option 1',data:[40.57,23.96,39.87],backgroundColor:P1,borderRadius:4},
-        {label:'Option 2',data:[40.59,25.48,35.51],backgroundColor:P2,borderRadius:4}
+        {label:'Option 1',data:[37.23,20.76,37.32],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2',data:[31.96,17.01,29.73],backgroundColor:P2,borderRadius:4}
       ]
     },
     options:opts()
@@ -391,8 +397,8 @@
       data:{
         labels:['Scheduled','Appt Handled','Product Started','Product Completed'],
         datasets:[
-          {label:'Option 1',data:[2546,1033,1015,610],backgroundColor:P1,borderRadius:4},
-          {label:'Option 2',data:[887,360,315,226],backgroundColor:P2,borderRadius:4}
+          {label:'Option 1',data:[940689,350185,351024,195324],backgroundColor:P1,borderRadius:4},
+          {label:'Option 2',data:[772261,246812,229544,131397],backgroundColor:P2,borderRadius:4}
         ]
       },
       options:o
@@ -404,8 +410,8 @@
     data:{
       labels:['In-Person\nHandled','In-Person\nProd Comp','Virtual\nHandled','Virtual\nProd Comp'],
       datasets:[
-        {label:'Option 1',data:[34.24,25.31,57.80,20.21],backgroundColor:P1,borderRadius:4},
-        {label:'Option 2',data:[33.58,26.60,64.82,21.61],backgroundColor:P2,borderRadius:4}
+        {label:'Option 1',data:[29.66,20.89,53.85,20.50],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2',data:[25.76,15.35,61.31,24.91],backgroundColor:P2,borderRadius:4}
       ]
     },
     options:opts()
@@ -414,10 +420,10 @@
   new Chart(document.getElementById('chartOutcome'),{
     type:'bar',
     data:{
-      labels:['Agent Missed','Future Appt','Customer Missed','Orig Agent Joined'],
+      labels:['Agent Missed','Customer Missed','Future Appt','Orig Agent Joined','Other'],
       datasets:[
-        {label:'Opt 1 Prod Comp %',data:[36.09,0.65,27.96,18.82],backgroundColor:P1,borderRadius:4},
-        {label:'Opt 2 Prod Comp %',data:[35.69,1.72,26.51,23.53],backgroundColor:P2,borderRadius:4}
+        {label:'Opt 1 Prod Comp %',data:[39.91,13.42,1.77,33.24,12.57],backgroundColor:P1,borderRadius:4},
+        {label:'Opt 2 Prod Comp %',data:[29.34,19.93,0.43,32.86,9.69],backgroundColor:P2,borderRadius:4}
       ]
     },
     options:opts()
@@ -426,10 +432,10 @@
   new Chart(document.getElementById('chartSkuCompleters'),{
     type:'bar',
     data:{
-      labels:['Full Service','DIWM NB','DIWM Basic','DIY Paid','DIY Free'],
+      labels:['Full Service','DIWM NB','DIWM Basic','DIY Paid','DIY Free','BizTax','Other'],
       datasets:[
-        {label:'Option 1 (% of completers)',data:[93.6,4.2,1.5,0.6,0.1],backgroundColor:P1,borderRadius:4},
-        {label:'Option 2 (% of completers)',data:[86.0,7.9,2.9,0.9,1.0],backgroundColor:P2,borderRadius:4}
+        {label:'Option 1 (% of completers)',data:[71.8,9.9,3.6,8.1,3.4,2.8,0.4],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2 (% of completers)',data:[55.3,14.1,5.3,16.8,6.7,0.6,1.3],backgroundColor:P2,borderRadius:4}
       ]
     },
     options:opts()
@@ -444,9 +450,9 @@
       data:{
         labels:['Appt+FS WT\nOpt 1','Appt+FS WT\nOpt 2','PS Transfer\nOpt 1','PS Transfer\nOpt 2'],
         datasets:[
-          {label:'FS Rate',data:[14.16,11.28,6.41,1.02],backgroundColor:FS,borderRadius:4},
-          {label:'DIWM Rate',data:[1.42,4.13,4.55,4.15],backgroundColor:DIWM,borderRadius:4},
-          {label:'DIY Rate',data:[0.62,1.79,3.50,4.49],backgroundColor:DIY,borderRadius:4}
+          {label:'FS Rate',data:[34.25,26.11,3.92,1.00],backgroundColor:FS,borderRadius:4},
+          {label:'DIWM Rate',data:[4.53,5.81,6.19,6.67],backgroundColor:DIWM,borderRadius:4},
+          {label:'DIY Rate',data:[3.37,5.25,7.59,10.30],backgroundColor:DIY,borderRadius:4}
         ]
       },
       options:o2
@@ -456,10 +462,10 @@
   new Chart(document.getElementById('chartStartStatus'),{
     type:'bar',
     data:{
-      labels:['Not Started\nAppt Hndl','Not Started\nProd Comp','Started\nAppt Hndl','Started\nProd Comp','Not in TY25\nAppt Hndl','Not in TY25\nProd Comp'],
+      labels:['Not in TY25\nAppt Hndl','Not in TY25\nProd Comp','Not Started\nAppt Hndl','Started\nAppt Hndl','Started\nProd Comp'],
       datasets:[
-        {label:'Option 1',data:[56.06,39.53,34.92,20.00,20.00,0],backgroundColor:P1,borderRadius:4},
-        {label:'Option 2',data:[54.52,51.51,42.12,17.68,19.51,0],backgroundColor:P2,borderRadius:4}
+        {label:'Option 1',data:[57.2,53.7,44.3,36.8,21.9],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2',data:[70.2,34.2,40.3,31.5,17.9],backgroundColor:P2,borderRadius:4}
       ]
     },
     options:opts()
