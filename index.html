@@ -452,29 +452,104 @@
   </div>
 </div>
 
-<!-- Section 11: VOC Contact Themes -->
+<!-- Section 11: Full-Population VOC — Contact Intent & Sentiment -->
 <div class="section">
-  <h2>11. VOC Contact Themes &mdash; Why Callers Don&rsquo;t Convert</h2>
+  <h2>11. VOC Contact Intent &amp; Sentiment &mdash; All Callers by Prompt</h2>
   <div class="insight">
-    <strong>Technical failures and service delivery issues are the top friction themes among concierge callers who didn&rsquo;t take action.</strong> These VOC summaries (from the ae_no_action_cohort_voc tables) capture AI-classified themes from callers with 3+ minutes of talk time who didn&rsquo;t schedule an appointment or receive a warm transfer. The themes explain the gap between call volume and conversion.
+    <strong>Quantitative misrouting confirmed: 39% of Opt 2 callers had FS/appointment-scheduling intent.</strong> Joined contact driver performance data (cgcs_contact_driver_performance_ty25) to ae_concierge_mece at ~100% match rate. GenAI-classified dominant_intent covers ~30-35% of all contacts per prompt — a statistically robust sample of 31K+ per prompt. This lets us quantitatively measure whether callers' actual contact reasons match their prompt selection.
   </div>
+
+  <!-- 11a: Intent Category Distribution -->
   <div class="chart-grid">
-    <div class="chart-card"><h3>VOC Themes &mdash; No-Action Cohort (3min+ Talk Time)</h3><canvas id="chartVocThemes"></canvas></div>
+    <div class="chart-card"><h3>Contact Intent Category by Prompt (GenAI-classified)</h3><canvas id="chartIntentCategory"></canvas></div>
     <div class="chart-card">
-      <h3>VOC Theme Detail</h3>
+      <h3>Intent Category Distribution</h3>
       <table>
-        <thead><tr><th>Theme</th><th class="num">Contacts</th><th>Definition</th></tr></thead>
+        <thead><tr><th>Intent Category</th><th class="num" style="color:var(--p1-light)">Opt 1 %</th><th class="num" style="color:var(--p1-light)">Opt 1 N</th><th class="num" style="color:var(--p2-light)">Opt 2 %</th><th class="num" style="color:var(--p2-light)">Opt 2 N</th><th>Prompt Alignment</th></tr></thead>
         <tbody>
-          <tr><td style="color:var(--red)"><strong>Technical System Failures</strong></td><td class="num">23</td><td style="font-size:0.78rem;color:var(--muted)">Checkout failures, screen sharing issues, software glitches blocking tax filing completion</td></tr>
-          <tr><td style="color:var(--p2)"><strong>Service Delivery Failures</strong></td><td class="num">18</td><td style="font-size:0.78rem;color:var(--muted)">Poor communication, missed appointments, unresponsive experts, inadequate service quality</td></tr>
-          <tr><td style="color:var(--appt)"><strong>Appointment Availability</strong></td><td class="num">15</td><td style="font-size:0.78rem;color:var(--muted)">Can&rsquo;t secure appointments within desired timeframe or location preferences</td></tr>
-          <tr><td style="color:var(--accent)"><strong>Process Complexity</strong></td><td class="num">12</td><td style="font-size:0.78rem;color:var(--muted)">Complex tax forms, unclear navigation, confusing service options exceeding comfort level</td></tr>
-          <tr><td style="color:var(--green)"><strong>Cost &amp; Value Concerns</strong></td><td class="num">8</td><td style="font-size:0.78rem;color:var(--muted)">Pricing hesitation, unclear value proposition, seeking free or lower-cost alternatives</td></tr>
+          <tr><td><strong>Appointment Scheduling</strong></td><td class="num highlight">39.4%</td><td class="num">13,358</td><td class="num">16.7%</td><td class="num">6,322</td><td style="font-size:0.75rem;color:var(--green)">Opt 1 &#10003;</td></tr>
+          <tr><td><strong>FS / Tax Prep Help</strong></td><td class="num">33.9%</td><td class="num">11,516</td><td class="num">22.3%</td><td class="num">8,439</td><td style="font-size:0.75rem;color:var(--red)">8.4K misrouted in Opt 2</td></tr>
+          <tr><td><strong>Technical / Filing Issues</strong></td><td class="num">4.6%</td><td class="num">1,563</td><td class="num">16.3%</td><td class="num">6,149</td><td style="font-size:0.75rem;color:var(--green)">Opt 2 &#10003;</td></tr>
+          <tr><td><strong>Billing / Refund</strong></td><td class="num">3.3%</td><td class="num">1,124</td><td class="num">12.6%</td><td class="num">4,780</td><td style="font-size:0.75rem;color:var(--green)">Opt 2 &#10003;</td></tr>
+          <tr><td><strong>Amendment / Prior Year</strong></td><td class="num">2.5%</td><td class="num">833</td><td class="num">5.0%</td><td class="num">1,876</td><td style="font-size:0.75rem;color:var(--muted)">Grey area</td></tr>
+          <tr><td><strong>Account Access / Login</strong></td><td class="num">0.8%</td><td class="num">262</td><td class="num">3.1%</td><td class="num">1,189</td><td style="font-size:0.75rem;color:var(--green)">Opt 2 &#10003;</td></tr>
+          <tr><td>Office Location / Directions</td><td class="num">2.5%</td><td class="num">860</td><td class="num">3.6%</td><td class="num">1,343</td><td style="font-size:0.75rem;color:var(--muted)">Neutral</td></tr>
+          <tr><td>Other / Unclear</td><td class="num">12.7%</td><td class="num">5,258</td><td class="num">19.8%</td><td class="num">8,967</td><td></td></tr>
         </tbody>
       </table>
       <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">
-        Source: <code>cgan_ustax_ws.ae_no_action_cohort_voc_daily_staging_3min_plus_talk_time</code><br>
-        Note: VOC themes are aggregated across both prompts (not split by prompt). Per-prompt VOC requires a direct join between raw VOC extracts and the MECE table.
+        Coverage: ~35% of Opt 1 contacts &middot; ~28% of Opt 2 contacts have GenAI dominant_intent<br>
+        Source: ae_concierge_mece JOIN cgcs_contact_driver_performance_ty25 ON cc_id
+      </p>
+    </div>
+  </div>
+
+  <!-- 11b: Sentiment -->
+  <div class="chart-grid" style="margin-top:24px;">
+    <div class="chart-card"><h3>Contact Sentiment by Prompt</h3><canvas id="chartSentiment"></canvas></div>
+    <div class="chart-card">
+      <h3>Sentiment &amp; TNPS Detail</h3>
+      <table>
+        <thead><tr><th>Metric</th><th class="num" style="color:var(--p1-light)">Opt 1</th><th class="num" style="color:var(--p2-light)">Opt 2</th><th class="num">Delta</th></tr></thead>
+        <tbody>
+          <tr style="background:rgba(99,102,241,0.06);"><td colspan="4" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);">GenAI Sentiment (all contacts with sentiment)</td></tr>
+          <tr><td>Positive</td><td class="num highlight">39.2%</td><td class="num">18.7%</td><td class="num highlight">+20.5pp</td></tr>
+          <tr><td>Neutral</td><td class="num">39.9%</td><td class="num">42.9%</td><td class="num">-3.0pp</td></tr>
+          <tr><td>Negative</td><td class="num">20.4%</td><td class="num" style="color:var(--red)">37.4%</td><td class="num" style="color:var(--red)">-17.0pp</td></tr>
+          <tr style="border-top:2px solid var(--border);background:rgba(99,102,241,0.06);"><td colspan="4" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);">TNPS (survey respondents only)</td></tr>
+          <tr><td>Promoter</td><td class="num highlight">76.8%</td><td class="num">70.9%</td><td class="num highlight">+5.9pp</td></tr>
+          <tr><td>Detractor</td><td class="num">14.2%</td><td class="num" style="color:var(--red)">20.2%</td><td class="num" style="color:var(--red)">-6.0pp</td></tr>
+          <tr><td>Neutral</td><td class="num">9.0%</td><td class="num">8.9%</td><td class="num">+0.1pp</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td><strong>TNPS Score</strong></td><td class="num" style="font-weight:700;color:var(--green)">+62.6</td><td class="num" style="font-weight:700;">+50.7</td><td class="num" style="color:var(--green)">+11.9pts</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">TNPS = % Promoter - % Detractor &middot; Opt 1 respondents: 3,365 &middot; Opt 2: 2,732</p>
+    </div>
+  </div>
+
+  <!-- 11c: OIT Category & Experience -->
+  <div class="chart-grid" style="margin-top:24px;">
+    <div class="chart-card"><h3>Contact Driver Category (OIT) by Prompt</h3><canvas id="chartOitCategory"></canvas></div>
+    <div class="chart-card">
+      <h3>Agent Experience &amp; Milestone at Contact</h3>
+      <table>
+        <thead><tr><th>Dimension</th><th class="num" style="color:var(--p1-light)">Opt 1</th><th class="num" style="color:var(--p2-light)">Opt 2</th></tr></thead>
+        <tbody>
+          <tr style="background:rgba(99,102,241,0.06);"><td colspan="3" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);">Agent Experience (top routes)</td></tr>
+          <tr><td>int_fs_expert</td><td class="num highlight">96.8%</td><td class="num">81.2%</td></tr>
+          <tr><td>ivr (stayed in IVR)</td><td class="num">0.0%</td><td class="num" style="color:var(--red)">12.7%</td></tr>
+          <tr><td>int_tax (tax support)</td><td class="num">2.1%</td><td class="num">3.3%</td></tr>
+          <tr><td>int_ps_general (PS transfer)</td><td class="num">0.4%</td><td class="num">1.6%</td></tr>
+          <tr style="border-top:2px solid var(--border);background:rgba(99,102,241,0.06);"><td colspan="3" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);">Filing Milestone at Contact (top 4)</td></tr>
+          <tr><td>Not Started</td><td class="num">43.3%</td><td class="num">40.5%</td></tr>
+          <tr><td>Completed / Post-File</td><td class="num">19.3%</td><td class="num">21.8%</td></tr>
+          <tr><td>Finish &amp; File</td><td class="num">10.3%</td><td class="num">9.8%</td></tr>
+          <tr><td>Personal Info</td><td class="num">9.4%</td><td class="num">8.0%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">Experience: what agent/queue the caller reached &middot; Milestone: where they were in TTO at time of call<br>12.7% of Opt 2 callers never left IVR &mdash; potential abandonment or self-resolution</p>
+    </div>
+  </div>
+
+  <!-- 11d: Completion Rate by Intent Category -->
+  <div class="chart-grid" style="margin-top:24px;">
+    <div class="chart-card"><h3>Completion Rate by Intent Category &amp; Prompt</h3><canvas id="chartIntentCompletion"></canvas></div>
+    <div class="chart-card">
+      <h3>Completion Rate by Intent Category</h3>
+      <table>
+        <thead><tr><th>Intent Category</th><th class="num" style="color:var(--p1-light)">Opt 1 Comp%</th><th class="num" style="color:var(--p2-light)">Opt 2 Comp%</th><th class="num">Opt 1 &Delta;</th></tr></thead>
+        <tbody>
+          <tr><td>Appointment Scheduling</td><td class="num highlight">27.9%</td><td class="num">26.3%</td><td class="num">+1.6pp</td></tr>
+          <tr><td>FS / Tax Prep Help</td><td class="num highlight">23.1%</td><td class="num">18.7%</td><td class="num highlight">+4.4pp</td></tr>
+          <tr><td>Account Access / Login</td><td class="num highlight">23.0%</td><td class="num">18.4%</td><td class="num">+4.6pp</td></tr>
+          <tr><td>Technical / Filing Issues</td><td class="num highlight">20.3%</td><td class="num">14.1%</td><td class="num highlight">+6.2pp</td></tr>
+          <tr><td>Other / Unclear</td><td class="num highlight">18.0%</td><td class="num">15.1%</td><td class="num">+2.9pp</td></tr>
+          <tr><td>Billing / Refund</td><td class="num highlight">10.7%</td><td class="num">9.7%</td><td class="num">+1.0pp</td></tr>
+          <tr><td>Amendment / Prior Year</td><td class="num">5.0%</td><td class="num">6.0%</td><td class="num" style="color:var(--red)">-1.0pp</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">
+        Opt 1 outperforms Opt 2 on completion rate in 6 of 7 intent categories, especially Technical/Filing Issues (+6.2pp). Even callers with tech issues complete at higher rates when routed through Opt 1&rsquo;s concierge path.
       </p>
     </div>
   </div>
@@ -484,28 +559,36 @@
 <div class="section">
   <h2>12. The &ldquo;Right Prompt&rdquo; Analysis &mdash; Are Customers Selecting Correctly?</h2>
   <div class="insight" style="border-left-color: var(--green);">
-    <strong>Opt 1 callers are well-matched:</strong> 62.9% already in FS, 89% state FS preference, 39% had assisted filing last year, 81% are New customers needing guidance. The ~23% starting in DIY/DIWM are &ldquo;convertible&rdquo; &mdash; they&rsquo;re trying DIY but pressing 1 signals they want help, and 35-54% end up in FS. These are high-value upsell opportunities the concierge path captures well.
+    <strong>Opt 1 callers are well-matched:</strong> 73.3% of Opt 1 callers had appointment scheduling or FS/tax-prep intent, consistent with Prompt 1&rsquo;s message (&ldquo;need help filing&rdquo;). 96.8% were routed to an FS expert agent. Sentiment is strongly positive (39.2% positive vs 20.4% negative), and TNPS is +62.6 &mdash; these callers got what they expected.
     <br><br>
-    <strong style="color:var(--red)">Opt 2 has a significant misrouting problem:</strong> ~50% of Opt 2 callers are already in FS AND 79% state FS as their filing preference. They want expert help but pressed 2 (&ldquo;tech support / already filed&rdquo;), likely because the prompt wording was ambiguous. The PS transfer path they get routed to yields only 1% FS completion vs 34% for the concierge path. This misrouting is the single largest driver of the performance gap between prompts.
+    <strong style="color:var(--red)">Opt 2 has a quantified misrouting problem:</strong> 39.0% of Opt 2 callers had FS/appointment-scheduling intent (22.3% + 16.7%), totaling ~14,761 contacts. These callers wanted expert help but pressed 2. They ended up with worse outcomes &mdash; Opt 1 completes FS/Tax Prep callers at 23.1% vs Opt 2&rsquo;s 18.7% (-4.4pp), and Technical/Filing Issues at 20.3% vs 14.1% (-6.2pp). Sentiment confirms the mismatch: Opt 2 has 37.4% negative sentiment vs only 20.4% for Opt 1.
     <br><br>
-    <strong>The ~12% of Opt 2 who state DIY preference + 33% starting in DIY/DIWM</strong> are likely the correctly-routed tech-support seekers. They&rsquo;re more self-sufficient (64% filed themselves last year) and appropriately seeking help with a technical issue rather than expert filing.
+    <strong>Opt 2 correctly serves ~32%:</strong> 16.3% Tech/Filing Issues + 12.6% Billing/Refund + 3.1% Account Access = 32.0% of Opt 2 callers had intents matching &ldquo;already filed / tech support.&rdquo; These are the correctly-routed callers. Another 12.7% stayed in IVR and never reached an agent.
   </div>
   <div class="chart-grid">
     <div class="chart-card">
-      <h3>Prompt Selection &mdash; Signal Summary</h3>
+      <h3>Prompt Selection &mdash; Comprehensive Signal Summary</h3>
       <table>
         <thead><tr><th>Signal</th><th class="num" style="color:var(--p1-light)">Opt 1</th><th class="num" style="color:var(--p2-light)">Opt 2</th><th>Interpretation</th></tr></thead>
         <tbody>
+          <tr style="background:rgba(99,102,241,0.06);"><td colspan="4" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);">Product &amp; preference signals</td></tr>
           <tr><td>Already in FS product</td><td class="num">62.9%</td><td class="num">49.8%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 1 callers self-select correctly</td></tr>
-          <tr><td>State FS preference</td><td class="num">89.0%</td><td class="num">79.4%</td><td style="font-size:0.78rem;color:var(--red)">79% of Opt 2 want FS &mdash; likely misrouted</td></tr>
-          <tr><td>Prior-year assisted filer</td><td class="num">39.2%</td><td class="num">28.9%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 1 has more assisted-filing background</td></tr>
-          <tr><td>Prior-year DIY filer</td><td class="num">50.7%</td><td class="num">64.0%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 2 more self-sufficient historically</td></tr>
-          <tr><td>New customer</td><td class="num">81.5%</td><td class="num">73.3%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 1 draws more new customers needing help</td></tr>
-          <tr><td>Non-FS start &rarr; FS conversion</td><td class="num">35-54%</td><td class="num">16-32%</td><td style="font-size:0.78rem;color:var(--green)">Opt 1 concierge path drives FS upsell</td></tr>
+          <tr><td>State FS preference</td><td class="num">89.0%</td><td class="num">79.4%</td><td style="font-size:0.78rem;color:var(--red)">79% of Opt 2 want FS &mdash; misrouted</td></tr>
+          <tr><td>Prior-year assisted filer</td><td class="num">39.2%</td><td class="num">28.9%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 1 more assisted-filing background</td></tr>
+          <tr style="border-top:2px solid var(--border);background:rgba(99,102,241,0.06);"><td colspan="4" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);">VOC contact intent signals (GenAI classified)</td></tr>
+          <tr><td>FS/Appt intent (correctly in Opt 1)</td><td class="num highlight">73.3%</td><td class="num" style="color:var(--red)">39.0%</td><td style="font-size:0.78rem;color:var(--red)">39% of Opt 2 are misrouted FS callers</td></tr>
+          <tr><td>Tech/Billing/Acct intent (correct for Opt 2)</td><td class="num">8.7%</td><td class="num highlight">32.0%</td><td style="font-size:0.78rem;color:var(--green)">Opt 2 correctly routes 32%</td></tr>
+          <tr style="border-top:2px solid var(--border);background:rgba(99,102,241,0.06);"><td colspan="4" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);">Sentiment &amp; satisfaction signals</td></tr>
+          <tr><td>Positive sentiment</td><td class="num highlight">39.2%</td><td class="num">18.7%</td><td style="font-size:0.78rem;color:var(--green)">2x more positive in Opt 1</td></tr>
+          <tr><td>Negative sentiment</td><td class="num">20.4%</td><td class="num" style="color:var(--red)">37.4%</td><td style="font-size:0.78rem;color:var(--red)">1.8x more negative in Opt 2</td></tr>
+          <tr><td>TNPS score</td><td class="num highlight">+62.6</td><td class="num">+50.7</td><td style="font-size:0.78rem;color:var(--green)">+11.9 point advantage for Opt 1</td></tr>
+          <tr style="border-top:2px solid var(--border);background:rgba(99,102,241,0.06);"><td colspan="4" style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);">Outcome signals</td></tr>
+          <tr><td>Non-FS start &rarr; FS conversion</td><td class="num">35-54%</td><td class="num">16-32%</td><td style="font-size:0.78rem;color:var(--green)">Opt 1 concierge drives FS upsell</td></tr>
+          <tr><td>Routed to FS expert agent</td><td class="num highlight">96.8%</td><td class="num">81.2%</td><td style="font-size:0.78rem;color:var(--muted)">12.7% of Opt 2 stayed in IVR</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="chart-card"><h3>Filing Preference vs Start SKU &mdash; Intent Alignment</h3><canvas id="chartIntentAlign"></canvas></div>
+    <div class="chart-card"><h3>Opt 2 Caller Intent Breakdown &mdash; Who Is Correctly Routed?</h3><canvas id="chartIntentAlign"></canvas></div>
   </div>
 </div>
 
@@ -522,7 +605,7 @@
     &bull; <strong>Agent Missed outcome is a key differentiator</strong> &mdash; Opt 1 achieves 39.9% completion vs 29.3% for Opt 2, a 10.6pp gap<br>
     &bull; <strong>Opt 1 is the FS conversion engine</strong> &mdash; non-FS starters convert to FS at 15-22pp higher rates via concierge vs PS transfer (e.g. DIY Paid: 37.5% vs 16.0% &rarr; FS)<br>
     &bull; <strong>~50% of Opt 2 callers are likely misrouted</strong> &mdash; they&rsquo;re already in FS and state FS preference, but pressed 2 for &ldquo;tech support.&rdquo; Clearer prompt wording could recapture this volume<br>
-    &bull; <strong>VOC themes confirm friction drivers</strong> &mdash; technical failures, service delivery issues, and appointment availability are the top reasons callers don&rsquo;t convert<br>
+    &bull; <strong>VOC quantitatively confirms misrouting</strong> &mdash; 39% of Opt 2 callers had FS/appointment intent; Opt 2 negative sentiment is 37.4% vs 20.4% for Opt 1; TNPS is +50.7 vs +62.6. Even callers with tech issues complete at 20.3% in Opt 1 vs 14.1% in Opt 2 (+6.2pp)<br>
     &bull; <strong>Recommendation: Option 1 is the higher-performing prompt</strong> &mdash; it drives more appointments through concierge, achieves higher FS conversion, and yields a significantly richer SKU mix. Consider refining Prompt 2 wording to reduce misrouting of FS-intent callers
   </div>
 </div>
@@ -532,8 +615,8 @@
   <p>Post-contact filter: <code>current_schedule_ts &ge; contact_start_ts</code> for appointments; <code>pam_complete_date &ge; DATE(contact_start_ts)</code> for product completion</p>
   <p>Appointment Handled = <code>handled_ind = 1</code> &middot; Product Completed = <code>completed_flag = 1</code></p>
   <p>Section 5 "warm transfer" = <code>funnel_stage = 'fs warm transfer'</code> (FS warm transfers only)</p>
-  <p>Sections 7&ndash;12: start_sku, filing_preferences__c, prior_year_tax_prep_method__c, tto_segment_rollup from ae_concierge_mece</p>
-  <p>Section 11 VOC source: <code>cgan_ustax_ws.ae_no_action_cohort_voc_daily_staging_3min_plus_talk_time</code></p>
+  <p>Sections 7&ndash;10: start_sku, filing_preferences__c, prior_year_tax_prep_method__c, tto_segment_rollup from ae_concierge_mece</p>
+  <p>Section 11 VOC source: <code>cgan_ustax_ws.cgcs_contact_driver_performance_ty25</code> joined to ae_concierge_mece via cc_id (~100% match rate). GenAI fields cover ~30&ndash;35% of contacts.</p>
   <p>Generated: Mar 30, 2026 &middot; Author: Lanny Huang</p>
 </div>
 
@@ -725,39 +808,99 @@
     options:opts()
   });
 
-  /* Section 11: VOC Themes */
+  /* Section 11a: Intent Category by Prompt */
   (function(){
-    var o5=opts();
-    o5.indexAxis='y';
-    delete o5.scales.y.ticks.callback;
-    o5.scales.x.ticks.callback=function(v){return v;};
-    o5.plugins.legend={display:false};
-    new Chart(document.getElementById('chartVocThemes'),{
+    var o=opts();
+    o.indexAxis='y';
+    delete o.scales.y.ticks.callback;
+    o.scales.x.ticks.callback=function(v){return v+'%';};
+    o.plugins.legend={labels:{color:'#94a3b8',font:{size:10}}};
+    new Chart(document.getElementById('chartIntentCategory'),{
       type:'bar',
       data:{
-        labels:['Technical System\nFailures','Service Delivery\nFailures','Appointment\nAvailability','Process\nComplexity','Cost & Value\nConcerns'],
+        labels:['Appt Scheduling','FS / Tax Prep','Technical / Filing','Billing / Refund','Amendment / PY','Account / Login','Office Location','Other / Unclear'],
         datasets:[
-          {label:'Contact Count',data:[23,18,15,12,8],backgroundColor:['#f87171','#f59e0b','#22d3ee','#818cf8','#34d399'],borderRadius:4}
+          {label:'Opt 1 %',data:[39.4,33.9,4.6,3.3,2.5,0.8,2.5,12.7],backgroundColor:P1,borderRadius:4},
+          {label:'Opt 2 %',data:[16.7,22.3,16.3,12.6,5.0,3.1,3.6,19.8],backgroundColor:P2,borderRadius:4}
         ]
       },
-      options:o5
+      options:o
     });
   })();
 
-  /* Section 12: Intent Alignment */
+  /* Section 11b: Sentiment by Prompt */
   (function(){
-    var o6=opts();
-    o6.plugins.legend={labels:{color:'#94a3b8',font:{size:10}}};
-    new Chart(document.getElementById('chartIntentAlign'),{
+    var o=opts();
+    o.plugins.legend={labels:{color:'#94a3b8',font:{size:10}}};
+    new Chart(document.getElementById('chartSentiment'),{
       type:'bar',
       data:{
-        labels:['Already in FS','State FS Pref','PY Assisted','New Customer'],
+        labels:['Positive','Neutral','Negative'],
         datasets:[
-          {label:'Option 1',data:[62.9,89.0,39.2,81.5],backgroundColor:P1,borderRadius:4},
-          {label:'Option 2',data:[49.8,79.4,28.9,73.3],backgroundColor:P2,borderRadius:4}
+          {label:'Opt 1',data:[39.2,39.9,20.4],backgroundColor:P1,borderRadius:4},
+          {label:'Opt 2',data:[18.7,42.9,37.4],backgroundColor:P2,borderRadius:4}
         ]
       },
-      options:o6
+      options:o
+    });
+  })();
+
+  /* Section 11c: OIT Category by Prompt */
+  (function(){
+    var o=opts();
+    o.indexAxis='y';
+    delete o.scales.y.ticks.callback;
+    o.scales.x.ticks.callback=function(v){return v+'%';};
+    o.plugins.legend={labels:{color:'#94a3b8',font:{size:10}}};
+    new Chart(document.getElementById('chartOitCategory'),{
+      type:'bar',
+      data:{
+        labels:['int_fs_expert','ivr (stayed)','int_tax','int_ps_general'],
+        datasets:[
+          {label:'Opt 1',data:[96.8,0.0,2.1,0.4],backgroundColor:P1,borderRadius:4},
+          {label:'Opt 2',data:[81.2,12.7,3.3,1.6],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o
+    });
+  })();
+
+  /* Section 11d: Completion Rate by Intent Category */
+  (function(){
+    var o=opts();
+    o.indexAxis='y';
+    delete o.scales.y.ticks.callback;
+    o.scales.x.ticks.callback=function(v){return v+'%';};
+    o.plugins.legend={labels:{color:'#94a3b8',font:{size:10}}};
+    new Chart(document.getElementById('chartIntentCompletion'),{
+      type:'bar',
+      data:{
+        labels:['Appt Scheduling','FS / Tax Prep','Account / Login','Technical / Filing','Other / Unclear','Billing / Refund','Amendment / PY'],
+        datasets:[
+          {label:'Opt 1 Comp%',data:[27.9,23.1,23.0,20.3,18.0,10.7,5.0],backgroundColor:P1,borderRadius:4},
+          {label:'Opt 2 Comp%',data:[26.3,18.7,18.4,14.1,15.1,9.7,6.0],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o
+    });
+  })();
+
+  /* Section 12: Opt 2 Intent Breakdown — Misrouting Visualization */
+  (function(){
+    var o6=opts();
+    o6.plugins.legend={display:false};
+    o6.plugins.tooltip={callbacks:{label:function(ctx){return ctx.raw+'%';}}};
+    new Chart(document.getElementById('chartIntentAlign'),{
+      type:'doughnut',
+      data:{
+        labels:['FS / Tax Prep (misrouted)','Appt Scheduling (misrouted)','Tech / Filing (correct)','Billing / Refund (correct)','Account Access (correct)','Amendment / PY','Office / Directions','Other / Unclear'],
+        datasets:[{
+          data:[22.3,16.7,16.3,12.6,3.1,5.0,3.6,19.8],
+          backgroundColor:['#f87171','#fb923c','#34d399','#22d3ee','#818cf8','#94a3b8','#64748b','#475569'],
+          borderWidth:0
+        }]
+      },
+      options:{responsive:true,plugins:{legend:{position:'right',labels:{color:'#94a3b8',font:{size:10},padding:8}}}}
     });
   })();
 })();
