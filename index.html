@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IVR Prompt 1 vs 2: Post-Contact Appointment Completion Analysis</title>
+<title>IVR Prompt 1 vs 2: Customer Intent, Conversion & VOC Analysis</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root {
@@ -72,8 +72,8 @@
 <body>
 <div class="container">
 
-<h1>IVR Prompt 1 vs 2: Post-Contact Appointment Analysis</h1>
-<p class="subtitle">Concierge IVR routing &middot; Since 3/13/2026 IVR change &middot; Source: ae_concierge_mece</p>
+<h1>IVR Prompt 1 vs 2: Customer Intent, Conversion &amp; VOC Analysis</h1>
+<p class="subtitle">Concierge IVR routing &middot; Since 3/13/2026 IVR change &middot; Source: ae_concierge_mece &middot; Sections 7&ndash;12 added 3/30</p>
 
 <!-- Data scope callout -->
 <div class="callout">
@@ -337,9 +337,181 @@
   </div>
 </div>
 
+<!-- Section 7: Start SKU — Who Is Calling In -->
+<div class="section">
+  <h2>7. Start SKU &mdash; Who Is Calling In?</h2>
+  <div class="insight">
+    <strong>Opt 1 callers are heavily concentrated in FS (62.9%), while Opt 2 is more diffuse across DIY/DIWM.</strong> 62.9% of Opt 1 callers were already in an FS product when they called &mdash; they self-selected correctly as filing-intent customers wanting an expert. Opt 2 has only 49.8% FS, with meaningfully more DIY FREE (19.0%) and DIY PAID (14.0%) callers &mdash; consistent with Prompt 2&rsquo;s message (&ldquo;technical questions or already filed&rdquo;).
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Start SKU Distribution &mdash; % of Callers by Prompt</h3><canvas id="chartStartSku"></canvas></div>
+    <div class="chart-card">
+      <h3>Start SKU Detail</h3>
+      <table>
+        <thead><tr><th>Start SKU</th><th class="num" style="color:var(--p1-light)">Opt 1 %</th><th class="num" style="color:var(--p1-light)">Opt 1 N</th><th class="num" style="color:var(--p2-light)">Opt 2 %</th><th class="num" style="color:var(--p2-light)">Opt 2 N</th><th class="num">Delta</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Full Service</strong></td><td class="num highlight">62.9%</td><td class="num">799,366</td><td class="num">49.8%</td><td class="num">586,128</td><td class="num highlight">+13.1pp</td></tr>
+          <tr><td>DIY Free</td><td class="num">13.9%</td><td class="num">176,108</td><td class="num">19.0%</td><td class="num">223,421</td><td class="num" style="color:var(--red)">-5.1pp</td></tr>
+          <tr><td>DIY Paid</td><td class="num">9.0%</td><td class="num">114,251</td><td class="num">14.0%</td><td class="num">164,802</td><td class="num" style="color:var(--red)">-5.0pp</td></tr>
+          <tr><td>DIWM Non-Basic</td><td class="num">9.3%</td><td class="num">118,215</td><td class="num">11.6%</td><td class="num">136,215</td><td class="num">-2.3pp</td></tr>
+          <tr><td>DIWM Basic</td><td class="num">3.8%</td><td class="num">47,997</td><td class="num">4.0%</td><td class="num">47,583</td><td class="num">-0.2pp</td></tr>
+          <tr><td>BizTax Personal</td><td class="num">1.2%</td><td class="num">15,076</td><td class="num">1.5%</td><td class="num">17,700</td><td class="num">-0.3pp</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Section 8: Start SKU → Completed SKU Migration -->
+<div class="section">
+  <h2>8. Start SKU &rarr; Completed SKU Migration (Intent vs Outcome)</h2>
+  <div class="insight">
+    <strong>Opt 1 is a dramatically stronger FS conversion engine for non-FS starters.</strong> When non-FS customers call and press 1 (&ldquo;talk to an agent&rdquo;), they convert to FS at 15-22pp higher rates than Opt 2. A DIY Paid customer pressing 1 has a 37.5% chance of ending up in FS; pressing 2 yields only 16.0%. This is where FS upsell happens &mdash; the concierge path captures it, the PS transfer path does not.
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>% of Completers Who Ended at FS &mdash; by Start SKU</h3><canvas id="chartMigrationFS"></canvas></div>
+    <div class="chart-card">
+      <h3>Start &rarr; Completion Migration Detail</h3>
+      <table>
+        <thead><tr><th>Started In</th><th>Prompt</th><th class="num">Completers</th><th class="num" style="color:var(--green)">&rarr; FS %</th><th class="num" style="color:var(--appt)">&rarr; DIWM %</th><th class="num" style="color:var(--p2)">&rarr; DIY %</th></tr></thead>
+        <tbody>
+          <tr><td>FS</td><td>Opt 1</td><td class="num">235,327</td><td class="num">87.8%</td><td class="num">8.4%</td><td class="num">0.4%</td></tr>
+          <tr><td>FS</td><td>Opt 2</td><td class="num">138,112</td><td class="num highlight">92.6%</td><td class="num">7.1%</td><td class="num">0.2%</td></tr>
+          <tr style="border-top:2px solid var(--border)"><td>DIWM Non-Basic</td><td>Opt 1</td><td class="num">40,486</td><td class="num highlight">53.5%</td><td class="num">45.2%</td><td class="num">1.1%</td></tr>
+          <tr><td>DIWM Non-Basic</td><td>Opt 2</td><td class="num">46,566</td><td class="num">32.0%</td><td class="num">65.2%</td><td class="num">2.6%</td></tr>
+          <tr style="border-top:2px solid var(--border)"><td>DIY Paid</td><td>Opt 1</td><td class="num">38,395</td><td class="num highlight">37.5%</td><td class="num">7.0%</td><td class="num">54.8%</td></tr>
+          <tr><td>DIY Paid</td><td>Opt 2</td><td class="num">48,995</td><td class="num">16.0%</td><td class="num">8.7%</td><td class="num">74.5%</td></tr>
+          <tr style="border-top:2px solid var(--border)"><td>DIY Free</td><td>Opt 1</td><td class="num">36,368</td><td class="num highlight">34.8%</td><td class="num">7.9%</td><td class="num">54.4%</td></tr>
+          <tr><td>DIY Free</td><td>Opt 2</td><td class="num">45,905</td><td class="num">19.7%</td><td class="num">6.5%</td><td class="num">67.1%</td></tr>
+          <tr style="border-top:2px solid var(--border)"><td>DIWM Basic</td><td>Opt 1</td><td class="num">11,382</td><td class="num highlight">44.8%</td><td class="num">54.0%</td><td class="num">0.5%</td></tr>
+          <tr><td>DIWM Basic</td><td>Opt 2</td><td class="num">14,627</td><td class="num">22.4%</td><td class="num">69.6%</td><td class="num">6.7%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Section 9: Stated Filing Preference & Prior Year Method -->
+<div class="section">
+  <h2>9. Stated Filing Preference &amp; Prior Year Filing Method</h2>
+  <div class="insight">
+    <strong>89% of Opt 1 callers state FS as their preference &mdash; but so do 79% of Opt 2 callers.</strong> The 11.6% of Opt 2 who state DIY preference (vs 4.9% Opt 1) are likely the &ldquo;correct&rdquo; Prompt 2 users seeking tech support. Meanwhile, the ~79% of Opt 2 callers stating FS preference suggests significant misrouting &mdash; they want expert help but picked the wrong prompt. Opt 2 callers are also more likely to be prior-year DIY filers (64% vs 51%), while Opt 1 attracts more prior-year assisted filers (39% vs 29%).
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Stated Filing Preference by Prompt</h3><canvas id="chartFilingPref"></canvas></div>
+    <div class="chart-card"><h3>Prior Year Filing Method by Prompt</h3><canvas id="chartPriorYear"></canvas></div>
+  </div>
+  <div class="chart-grid" style="margin-top:24px;">
+    <div class="chart-card">
+      <h3>Filing Preference Detail</h3>
+      <table>
+        <thead><tr><th>Filing Preference</th><th class="num" style="color:var(--p1-light)">Opt 1 %</th><th class="num" style="color:var(--p2-light)">Opt 2 %</th><th class="num">Delta</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Full Service</strong></td><td class="num highlight">89.0%</td><td class="num">79.4%</td><td class="num highlight">+9.6pp</td></tr>
+          <tr><td>DIY</td><td class="num">4.9%</td><td class="num">11.6%</td><td class="num" style="color:var(--red)">-6.7pp</td></tr>
+          <tr><td>No Preference</td><td class="num">4.2%</td><td class="num">6.5%</td><td class="num">-2.3pp</td></tr>
+          <tr><td>DIWM</td><td class="num">1.3%</td><td class="num">2.2%</td><td class="num">-0.9pp</td></tr>
+          <tr><td>Business Tax</td><td class="num">0.6%</td><td class="num">0.3%</td><td class="num">+0.3pp</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-card">
+      <h3>Prior Year Filing Method Detail</h3>
+      <table>
+        <thead><tr><th>How They Filed Last Year</th><th class="num" style="color:var(--p1-light)">Opt 1 %</th><th class="num" style="color:var(--p2-light)">Opt 2 %</th></tr></thead>
+        <tbody>
+          <tr><td>I did them myself (DIY)</td><td class="num">50.7%</td><td class="num highlight">64.0%</td></tr>
+          <tr><td>Someone did them for me (Assisted)</td><td class="num highlight">39.2%</td><td class="num">28.9%</td></tr>
+          <tr><td>I did not file</td><td class="num">10.2%</td><td class="num">7.1%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Section 10: New vs Returning -->
+<div class="section">
+  <h2>10. New vs Returning Customer Profile</h2>
+  <div class="insight">
+    <strong>Opt 1 draws proportionally more New customers (81.5% of known), while Opt 2 draws more Returning (26.7% vs 18.5%).</strong> Returning customers complete at dramatically higher rates in both prompts (49.9% Opt 1 vs 38.3% Opt 2), but Opt 1 still holds an 11.6pp edge. Among New customers, Opt 1 outperforms by 4.1pp (21.5% vs 17.4%).
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>Post-Contact Completion Rate &mdash; New vs Returning</h3><canvas id="chartNewRet"></canvas></div>
+    <div class="chart-card">
+      <h3>New vs Returning Detail</h3>
+      <table>
+        <thead><tr><th>Segment</th><th>Prompt</th><th class="num">Customers</th><th class="num col-prod">Completers</th><th class="num col-prod">Comp Rate</th></tr></thead>
+        <tbody>
+          <tr><td>New</td><td>Opt 1</td><td class="num">1,119,494</td><td class="num">240,970</td><td class="num highlight">21.5%</td></tr>
+          <tr><td>New</td><td>Opt 2</td><td class="num">949,890</td><td class="num">165,272</td><td class="num">17.4%</td></tr>
+          <tr style="border-top:2px solid var(--border)"><td>Returning</td><td>Opt 1</td><td class="num">254,017</td><td class="num">126,769</td><td class="num highlight">49.9%</td></tr>
+          <tr><td>Returning</td><td>Opt 2</td><td class="num">346,451</td><td class="num">132,650</td><td class="num">38.3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Section 11: VOC Contact Themes -->
+<div class="section">
+  <h2>11. VOC Contact Themes &mdash; Why Callers Don&rsquo;t Convert</h2>
+  <div class="insight">
+    <strong>Technical failures and service delivery issues are the top friction themes among concierge callers who didn&rsquo;t take action.</strong> These VOC summaries (from the ae_no_action_cohort_voc tables) capture AI-classified themes from callers with 3+ minutes of talk time who didn&rsquo;t schedule an appointment or receive a warm transfer. The themes explain the gap between call volume and conversion.
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>VOC Themes &mdash; No-Action Cohort (3min+ Talk Time)</h3><canvas id="chartVocThemes"></canvas></div>
+    <div class="chart-card">
+      <h3>VOC Theme Detail</h3>
+      <table>
+        <thead><tr><th>Theme</th><th class="num">Contacts</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--red)"><strong>Technical System Failures</strong></td><td class="num">23</td><td style="font-size:0.78rem;color:var(--muted)">Checkout failures, screen sharing issues, software glitches blocking tax filing completion</td></tr>
+          <tr><td style="color:var(--p2)"><strong>Service Delivery Failures</strong></td><td class="num">18</td><td style="font-size:0.78rem;color:var(--muted)">Poor communication, missed appointments, unresponsive experts, inadequate service quality</td></tr>
+          <tr><td style="color:var(--appt)"><strong>Appointment Availability</strong></td><td class="num">15</td><td style="font-size:0.78rem;color:var(--muted)">Can&rsquo;t secure appointments within desired timeframe or location preferences</td></tr>
+          <tr><td style="color:var(--accent)"><strong>Process Complexity</strong></td><td class="num">12</td><td style="font-size:0.78rem;color:var(--muted)">Complex tax forms, unclear navigation, confusing service options exceeding comfort level</td></tr>
+          <tr><td style="color:var(--green)"><strong>Cost &amp; Value Concerns</strong></td><td class="num">8</td><td style="font-size:0.78rem;color:var(--muted)">Pricing hesitation, unclear value proposition, seeking free or lower-cost alternatives</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:10px;">
+        Source: <code>cgan_ustax_ws.ae_no_action_cohort_voc_daily_staging_3min_plus_talk_time</code><br>
+        Note: VOC themes are aggregated across both prompts (not split by prompt). Per-prompt VOC requires a direct join between raw VOC extracts and the MECE table.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Section 12: The "Right Prompt" Analysis -->
+<div class="section">
+  <h2>12. The &ldquo;Right Prompt&rdquo; Analysis &mdash; Are Customers Selecting Correctly?</h2>
+  <div class="insight" style="border-left-color: var(--green);">
+    <strong>Opt 1 callers are well-matched:</strong> 62.9% already in FS, 89% state FS preference, 39% had assisted filing last year, 81% are New customers needing guidance. The ~23% starting in DIY/DIWM are &ldquo;convertible&rdquo; &mdash; they&rsquo;re trying DIY but pressing 1 signals they want help, and 35-54% end up in FS. These are high-value upsell opportunities the concierge path captures well.
+    <br><br>
+    <strong style="color:var(--red)">Opt 2 has a significant misrouting problem:</strong> ~50% of Opt 2 callers are already in FS AND 79% state FS as their filing preference. They want expert help but pressed 2 (&ldquo;tech support / already filed&rdquo;), likely because the prompt wording was ambiguous. The PS transfer path they get routed to yields only 1% FS completion vs 34% for the concierge path. This misrouting is the single largest driver of the performance gap between prompts.
+    <br><br>
+    <strong>The ~12% of Opt 2 who state DIY preference + 33% starting in DIY/DIWM</strong> are likely the correctly-routed tech-support seekers. They&rsquo;re more self-sufficient (64% filed themselves last year) and appropriately seeking help with a technical issue rather than expert filing.
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h3>Prompt Selection &mdash; Signal Summary</h3>
+      <table>
+        <thead><tr><th>Signal</th><th class="num" style="color:var(--p1-light)">Opt 1</th><th class="num" style="color:var(--p2-light)">Opt 2</th><th>Interpretation</th></tr></thead>
+        <tbody>
+          <tr><td>Already in FS product</td><td class="num">62.9%</td><td class="num">49.8%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 1 callers self-select correctly</td></tr>
+          <tr><td>State FS preference</td><td class="num">89.0%</td><td class="num">79.4%</td><td style="font-size:0.78rem;color:var(--red)">79% of Opt 2 want FS &mdash; likely misrouted</td></tr>
+          <tr><td>Prior-year assisted filer</td><td class="num">39.2%</td><td class="num">28.9%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 1 has more assisted-filing background</td></tr>
+          <tr><td>Prior-year DIY filer</td><td class="num">50.7%</td><td class="num">64.0%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 2 more self-sufficient historically</td></tr>
+          <tr><td>New customer</td><td class="num">81.5%</td><td class="num">73.3%</td><td style="font-size:0.78rem;color:var(--muted)">Opt 1 draws more new customers needing help</td></tr>
+          <tr><td>Non-FS start &rarr; FS conversion</td><td class="num">35-54%</td><td class="num">16-32%</td><td style="font-size:0.78rem;color:var(--green)">Opt 1 concierge path drives FS upsell</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-card"><h3>Filing Preference vs Start SKU &mdash; Intent Alignment</h3><canvas id="chartIntentAlign"></canvas></div>
+  </div>
+</div>
+
 <!-- Summary -->
 <div class="section">
-  <h2>7. Summary &amp; Recommendation</h2>
+  <h2>13. Summary &amp; Recommendation</h2>
   <div class="insight" style="border-left-color: var(--green);">
     <strong>Bottom line (full season data):</strong> With the complete data window, Option 1 meaningfully outperforms Option 2 on both appointment handling (37.2% vs 32.0%, -5.3pp) and product completion (20.8% vs 17.0%, -3.8pp). Key findings:
     <br><br>
@@ -348,7 +520,10 @@
     &bull; <strong>Concierge paths strongly favor Opt 1</strong> &mdash; 61.0% of Opt 1 goes through concierge vs 37.0% for Opt 2, with combined FS rate of 34.3% vs 26.1%<br>
     &bull; <strong>Opt 2 PS transfer captures ~30% of traffic</strong> &mdash; but yields only 1.0% FS completion. The revenue opportunity cost of rerouting to PS remains substantial<br>
     &bull; <strong>Agent Missed outcome is a key differentiator</strong> &mdash; Opt 1 achieves 39.9% completion vs 29.3% for Opt 2, a 10.6pp gap<br>
-    &bull; <strong>Recommendation: Option 1 is the higher-performing prompt</strong> &mdash; it drives more appointments through concierge, achieves higher FS conversion, and yields a significantly richer SKU mix
+    &bull; <strong>Opt 1 is the FS conversion engine</strong> &mdash; non-FS starters convert to FS at 15-22pp higher rates via concierge vs PS transfer (e.g. DIY Paid: 37.5% vs 16.0% &rarr; FS)<br>
+    &bull; <strong>~50% of Opt 2 callers are likely misrouted</strong> &mdash; they&rsquo;re already in FS and state FS preference, but pressed 2 for &ldquo;tech support.&rdquo; Clearer prompt wording could recapture this volume<br>
+    &bull; <strong>VOC themes confirm friction drivers</strong> &mdash; technical failures, service delivery issues, and appointment availability are the top reasons callers don&rsquo;t convert<br>
+    &bull; <strong>Recommendation: Option 1 is the higher-performing prompt</strong> &mdash; it drives more appointments through concierge, achieves higher FS conversion, and yields a significantly richer SKU mix. Consider refining Prompt 2 wording to reduce misrouting of FS-intent callers
   </div>
 </div>
 
@@ -357,6 +532,8 @@
   <p>Post-contact filter: <code>current_schedule_ts &ge; contact_start_ts</code> for appointments; <code>pam_complete_date &ge; DATE(contact_start_ts)</code> for product completion</p>
   <p>Appointment Handled = <code>handled_ind = 1</code> &middot; Product Completed = <code>completed_flag = 1</code></p>
   <p>Section 5 "warm transfer" = <code>funnel_stage = 'fs warm transfer'</code> (FS warm transfers only)</p>
+  <p>Sections 7&ndash;12: start_sku, filing_preferences__c, prior_year_tax_prep_method__c, tto_segment_rollup from ae_concierge_mece</p>
+  <p>Section 11 VOC source: <code>cgan_ustax_ws.ae_no_action_cohort_voc_daily_staging_3min_plus_talk_time</code></p>
   <p>Generated: Mar 30, 2026 &middot; Author: Lanny Huang</p>
 </div>
 
@@ -470,6 +647,119 @@
     },
     options:opts()
   });
+
+  /* Section 7: Start SKU */
+  new Chart(document.getElementById('chartStartSku'),{
+    type:'bar',
+    data:{
+      labels:['Full Service','DIY Free','DIY Paid','DIWM NB','DIWM Basic','BizTax'],
+      datasets:[
+        {label:'Option 1 (% of callers)',data:[62.9,13.9,9.0,9.3,3.8,1.2],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2 (% of callers)',data:[49.8,19.0,14.0,11.6,4.0,1.5],backgroundColor:P2,borderRadius:4}
+      ]
+    },
+    options:opts()
+  });
+
+  /* Section 8: Migration to FS */
+  new Chart(document.getElementById('chartMigrationFS'),{
+    type:'bar',
+    data:{
+      labels:['FS→FS','DIWM NB→FS','DIY Paid→FS','DIY Free→FS','DIWM Basic→FS'],
+      datasets:[
+        {label:'Option 1 (% ending at FS)',data:[87.8,53.5,37.5,34.8,44.8],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2 (% ending at FS)',data:[92.6,32.0,16.0,19.7,22.4],backgroundColor:P2,borderRadius:4}
+      ]
+    },
+    options:opts()
+  });
+
+  /* Section 9: Filing Preference */
+  (function(){
+    var o3=opts();
+    o3.indexAxis='y';
+    delete o3.scales.y.ticks.callback;
+    o3.scales.x.ticks.callback=function(v){return v+'%';};
+    new Chart(document.getElementById('chartFilingPref'),{
+      type:'bar',
+      data:{
+        labels:['Full Service','DIY','No Preference','DIWM','Business Tax'],
+        datasets:[
+          {label:'Option 1',data:[89.0,4.9,4.2,1.3,0.6],backgroundColor:P1,borderRadius:4},
+          {label:'Option 2',data:[79.4,11.6,6.5,2.2,0.3],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o3
+    });
+  })();
+
+  /* Section 9: Prior Year Method */
+  (function(){
+    var o4=opts();
+    o4.indexAxis='y';
+    delete o4.scales.y.ticks.callback;
+    o4.scales.x.ticks.callback=function(v){return v+'%';};
+    new Chart(document.getElementById('chartPriorYear'),{
+      type:'bar',
+      data:{
+        labels:['DIY (self)','Assisted (someone else)','Did not file'],
+        datasets:[
+          {label:'Option 1',data:[50.7,39.2,10.2],backgroundColor:P1,borderRadius:4},
+          {label:'Option 2',data:[64.0,28.9,7.1],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o4
+    });
+  })();
+
+  /* Section 10: New vs Returning */
+  new Chart(document.getElementById('chartNewRet'),{
+    type:'bar',
+    data:{
+      labels:['New\nCompletion Rate','Returning\nCompletion Rate'],
+      datasets:[
+        {label:'Option 1',data:[21.5,49.9],backgroundColor:P1,borderRadius:4},
+        {label:'Option 2',data:[17.4,38.3],backgroundColor:P2,borderRadius:4}
+      ]
+    },
+    options:opts()
+  });
+
+  /* Section 11: VOC Themes */
+  (function(){
+    var o5=opts();
+    o5.indexAxis='y';
+    delete o5.scales.y.ticks.callback;
+    o5.scales.x.ticks.callback=function(v){return v;};
+    o5.plugins.legend={display:false};
+    new Chart(document.getElementById('chartVocThemes'),{
+      type:'bar',
+      data:{
+        labels:['Technical System\nFailures','Service Delivery\nFailures','Appointment\nAvailability','Process\nComplexity','Cost & Value\nConcerns'],
+        datasets:[
+          {label:'Contact Count',data:[23,18,15,12,8],backgroundColor:['#f87171','#f59e0b','#22d3ee','#818cf8','#34d399'],borderRadius:4}
+        ]
+      },
+      options:o5
+    });
+  })();
+
+  /* Section 12: Intent Alignment */
+  (function(){
+    var o6=opts();
+    o6.plugins.legend={labels:{color:'#94a3b8',font:{size:10}}};
+    new Chart(document.getElementById('chartIntentAlign'),{
+      type:'bar',
+      data:{
+        labels:['Already in FS','State FS Pref','PY Assisted','New Customer'],
+        datasets:[
+          {label:'Option 1',data:[62.9,89.0,39.2,81.5],backgroundColor:P1,borderRadius:4},
+          {label:'Option 2',data:[49.8,79.4,28.9,73.3],backgroundColor:P2,borderRadius:4}
+        ]
+      },
+      options:o6
+    });
+  })();
 })();
 </script>
 </body>
